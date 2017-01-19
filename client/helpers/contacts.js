@@ -5,7 +5,7 @@ if(Meteor.isClient) {
 	$('ul.tabs').tabs();
 	$('.collapsible').collapsible();
 	$('.tooltipped').tooltip({delay: 50});
-	var contactList = Template.contacts.__helpers[" contactList"]();
+	var contactList = Contacts.findOne("Contacts")["contacts"];
 	var autoCompleteData = {};
 	for (contact in contactList)
 	    autoCompleteData[contactList[contact]["name"]] = null;    
@@ -29,8 +29,8 @@ if(Meteor.isClient) {
 	    wf.async = 'true';
 	    var s = document.getElementsByTagName('script')[0];
 	    s.parentNode.insertBefore(wf, s);
-	    console.log("async fonts loaded", WebFontConfig);
 	})();
+	Session.set("searchName", "");
     });
 
     Template.contacts.rendered = function() {
@@ -50,8 +50,10 @@ if(Meteor.isClient) {
     Template.contacts.helpers({
 	
 	contactList() {
-	    if (Session.get("searchName") != "")
-		return Template.contacts.__helpers[" findContact"](Session.get("searchName"));
+	    if (Session.get("searchName") != "") {
+		var searchString = Session.get("searchName");
+		return Template.contacts.__helpers[" findContact"](searchString);
+	    }
 	    else
 		return Contacts.findOne("Contacts")["contacts"];		
 	},
@@ -75,6 +77,46 @@ if(Meteor.isClient) {
 	    return findResult;
 	},
 
+	hasPhone(contactName) {	    
+	    for (id in Contacts.findOne("Contacts")["contacts"]) {
+		if(Contacts.findOne("Contacts")["contacts"][id]["name"]
+		   == contactName) {
+		    if(Contacts.findOne("Contacts")["contacts"][id]["phone"]
+		       != undefined)
+			return true;
+		}	    
+	    }
+	    return false;
+	},
+
+	hasHomePhone(contactName) {
+	    for (id in Contacts.findOne("Contacts")["contacts"]) {
+		if(Contacts.findOne("Contacts")["contacts"][id]["name"]
+		   == contactName) {
+		    if(Contacts.findOne("Contacts")["contacts"][id]["phone"]
+		       != undefined) {
+			if(Contacts.findOne("Contacts")["contacts"][id]["phone"]["home"] != undefined)
+			    return true;
+		    }
+		}	    
+	    }
+	    return false;
+	},
+
+	hasMobilePhone(contactName) {
+	    for (id in Contacts.findOne("Contacts")["contacts"]) {
+		if(Contacts.findOne("Contacts")["contacts"][id]["name"]
+		   == contactName) {
+		    if(Contacts.findOne("Contacts")["contacts"][id]["phone"]
+		       != undefined) {
+			if(Contacts.findOne("Contacts")["contacts"][id]["phone"]["mobile"] != undefined)
+			    return true;
+		    }
+		}	    
+	    }
+	    return false;
+	},		
+
 	hasEmail(contactName) {
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
 		if(Contacts.findOne("Contacts")["contacts"][id]["name"]
@@ -82,8 +124,6 @@ if(Meteor.isClient) {
 		    if(Contacts.findOne("Contacts")["contacts"][id]["email"]
 		       != undefined)
 			return true;
-		    else
-			return false;
 		}	    
 	    }
 	    return false;
@@ -93,11 +133,12 @@ if(Meteor.isClient) {
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
 		if(Contacts.findOne("Contacts")["contacts"][id]["name"]
 		   == contactName) {
-		    if(Contacts.findOne("Contacts")["contacts"][id]["email"]["personal"]
-		       != undefined)
-			return true;
-		    else
-			return false;
+		    if(Contacts.findOne("Contacts")["contacts"][id]["email"]
+		       != undefined) {
+			if(Contacts.findOne("Contacts")["contacts"][id]["email"]["personal"]
+			   != undefined)
+			    return true;
+		    }
 		}	    
 	    }
 	    return false;
@@ -107,11 +148,12 @@ if(Meteor.isClient) {
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
 		if(Contacts.findOne("Contacts")["contacts"][id]["name"]
 		   == contactName) {
-		    if(Contacts.findOne("Contacts")["contacts"][id]["email"]["work"]
-		       != undefined)
-			return true;
-		    else
-			return false;
+		    if(Contacts.findOne("Contacts")["contacts"][id]["email"]
+		       != undefined) {		    
+			if(Contacts.findOne("Contacts")["contacts"][id]["email"]["work"]
+			   != undefined)
+			    return true;
+		    }
 		}	    
 	    }
 	    return false;
@@ -124,8 +166,6 @@ if(Meteor.isClient) {
 		    if(Contacts.findOne("Contacts")["contacts"][id]["birthday"]
 		       != undefined)
 			return true;
-		    else
-			return false;
 		}	    
 	    }
 	    return false;
@@ -138,8 +178,6 @@ if(Meteor.isClient) {
 		    if(Contacts.findOne("Contacts")["contacts"][id]["address"]
 		       != undefined)
 			return true;
-		    else
-			return false;
 		}	    
 	    }
 	    return false;
@@ -153,11 +191,7 @@ if(Meteor.isClient) {
 		       != undefined) {
 			if(Contacts.findOne("Contacts")["contacts"][id]["address"]["home"] != undefined)
 			    return true;
-			else
-			    return false;
 		    }
-		    else
-			return false;
 		}	    
 	    }
 	    return false;
@@ -171,11 +205,7 @@ if(Meteor.isClient) {
 		       != undefined) {
 			if(Contacts.findOne("Contacts")["contacts"][id]["address"]["work"] != undefined)
 			    return true;
-			else
-			    return false;
 		    }
-		    else
-			return false;
 		}	    
 	    }
 	    return false;
@@ -220,8 +250,7 @@ if(Meteor.isClient) {
     Template.contacts.events({
 	'keypress input.autocomplete': function (event) {	
 	    if (event.which === 13) {
-		event.preventDefault();
-		console.log("Enter Key handled", event.target.value);
+		event.preventDefault();		
 	    }
 	},
 
@@ -236,7 +265,38 @@ if(Meteor.isClient) {
 		    break;
 		}
 	    }
-	    $('.tooltipped').tooltip({delay: 50});
+	},
+
+	'change input.contactsUpload' : function(event) {
+	    var uploadedFile =
+		document.getElementById('contactsUploadInput').files[0];
+	    if (uploadedFile) {
+		var r = new FileReader();
+		r.onload = function(e) { 
+		    var contents = e.target.result;
+		    Meteor.call('SERVER.uploadContacts',
+				contents,
+				(err, res) => {
+			if (err) {
+			    alert(err);
+			} else {
+			    // success!			    
+			    location.reload();
+			    var autoCompleteData = {};
+			    var contactList =
+				Contacts.findOne("Contacts")["contacts"];
+			    for (contact in contactList)
+				autoCompleteData[contactList[contact]["name"]] = null;    
+			    $('input.autocomplete').autocomplete({	
+				data: autoCompleteData
+			    });			    
+			}
+		    });		    
+		}
+		r.readAsText(uploadedFile);		
+	    }
+	    else 
+		alert("Failed to load file");
 	}
     });
 

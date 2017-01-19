@@ -6,6 +6,7 @@ import './templates/navigation.html'
 import './templates/home.html'
 import './templates/contacts.html'
 import './main.html';
+import '/imports/api/methods.js';
 
 Router.configure({
     layoutTemplate: 'main'

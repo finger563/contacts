@@ -1,53 +1,22 @@
 <template name="contacts">
-  <style>
-    .sorting,
-    .sorting_asc,
-    .sorting_desc {
-    cursor:pointer;
-    }
-
-    .nameColumn {
-    width:100px;
-    }
-
-    .material-tooltip { white-space: pre; }
-
-    .tooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
-    }
-
-    /* Tooltip text */
-    .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 150px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    padding: 5px 0;
-    
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 1;
-    bottom: 100%;
-    left: 50%;
-    margin-left: -75px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: black transparent transparent transparent;    
-    }
-
-    /* Show the tooltip text when you mouse over the tooltip container */
-    .tooltip:hover .tooltiptext {
-    visibility: visible;
-    }
-  </style>
   <div class="container">
     <div class="row">
       <div class="col s12">
 	<div class="row">
-          <div class="input-field col s12">
+	  <div class="col s1" style="cursor:pointer;">
+	    <form action="#">
+	      <div class="file-field input-field">
+		<a class="btn-floating red">
+		  <input id="contactsUploadInput"
+			 class="contactsUpload" type="file" accept=".json">
+		  <i class="material-icons">
+		    import_export
+		  </i>
+		</a>
+	      </div>
+	    </form>	    
+	  </div>
+          <div class="input-field col s11">
             <i class="material-icons prefix">textsms</i>
             <input type="text" id="autocomplete-input" class="autocomplete">
             <label for="autocomplete-input">Search</label>
@@ -56,16 +25,30 @@
       </div>
     </div>
     <div class="row">
-      {{#each contactList}}
-      <div class="col s6">
-        <div class="card white">
+      <div class="col s12">
+	{{#each contactList}}
+	<div class="card white col s6">
           <div class="card-content black-text">
 	    <span class="card-title">{{this.name}}</span>
 	    <p>
 
 	      {{#if hasBirthday this.name}}
 	      <b>Birthday:&nbsp;</b>{{this.birthday}}
-	      <br>
+	      {{/if}}
+
+	      {{#if hasPhone this.name}}
+	      <div class="row">
+		{{#if hasHomePhone this.name}}
+		<div class="col s12">
+		  <b>Home Phone:&nbsp;</b>{{this.phone.home}}
+		</div>
+		{{/if}}
+		{{#if hasMobilePhone this.name}}
+		<div class="col s12">
+		  <b>Mobile Phone:&nbsp;</b>{{this.phone.mobile}}
+		</div>
+		{{/if}}
+	      </div>
 	      {{/if}}
 
 	      {{#if hasEmail this.name}}
@@ -102,7 +85,7 @@
 		<div class="col s6">
 		  <b>Home Address:</b><br>
 		  <a
-		    href="https://maps.google.com/?q={{this.address.home.apartment}} {{this.address.home.street}} {{this.address.home.city}} {{this.address.home.state}} {{this.address.home.country}}"
+		    href="https://maps.google.com/?q={{this.address.home.street}}, {{this.address.home.city}}, {{this.address.home.state}}, {{this.address.home.country}}"
 		    target="_blank" style="color:black">		    
 		    {{this.address.home.apartment}},<br>
 		    {{this.address.home.street}},<br>
@@ -128,10 +111,9 @@
 	      {{/if}}
 	    </p>
           </div>
-        </div>
+	</div>
+	{{/each}}
       </div>
-      {{/each}}
-
     </div>      
   </div>    
   <script>
