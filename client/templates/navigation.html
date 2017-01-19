@@ -1,13 +1,35 @@
 <template name="navigation">
+  <style>
+    i,
+    nav .nav-wrapper ul li.li-no-hover:hover {
+    background-color: transparent; }    
+  </style>
   <nav>
     <div class="nav-wrapper red darken-1">
       <ul class="left hide-on-med-and-down">	
-        <li>
-	  <a href="{{pathFor 'contacts'}}">
-	    <i class="material-icons">contacts</i>
+        <li class="newContactButton">
+	  <a href="#">
+	    <i class="material-icons">add</i>
 	  </a>
-	</li>
+	</li>	
+	<li class="contactsUploadButton">
+	  <input class="contactsUpload" type="file"
+		 accept=".json" style="display:none;">
+	  <a href="#">
+	    <i class="material-icons">present_to_all</i>
+	  </a>
+	</li>	
       </ul>
+      <form class="right">
+        <div class="input-field">
+          <input type="search" required
+		 id="autocomplete-input"
+		 class="autocomplete">
+          <label for="autocomplete-search">
+	    <i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
+        </div>
+      </form>      
     </div>
   </nav>
 </template>

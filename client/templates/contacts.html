@@ -41,117 +41,56 @@
     font-size:14px;
     }
   </style>
-  <div class="container">
-
-    <!-- Modal Structure -->
-    <div id="newContactModal" class="modal modal-fixed-footer">
-      <div class="modal-content">
-	<div class="row">
-	  <form class="col s12">
-	    <div class="card-panel white">
-	      <div class="card-title">New Contact Form</div>
-	      <div class="row">
-		<div class="input-field col s12">
-		  <i class="tiny material-icons prefix">account_circle</i>
-		  <input id="name" type="text" class="validate">
-		  <label for="name">Name</label>
-		</div>
-		<div class="input-field col s12">
-		  <i class="material-icons prefix">today</i>
-		  <input id="birthday" type="date" class="datepicker">
-		  <label for="birthday">Birthday</label>
-		</div>
-
-		<div class="input-field col s12">
-		  <i class="material-icons prefix">speaker_phone</i>
-		  <input id="mobile_phone" type="text" class="validate">
-		  <label for="mobile_phone">Mobile Phone</label>
-		</div>
-		<div class="input-field col s12">
-		  <i class="material-icons prefix">phone</i>
-		  <input id="home_phone" type="text" class="validate">
-		  <label for="home_phone">Home Phone</label>
-		</div>
-		<div class="input-field col s12">
-		  <i class="material-icons prefix">contact_phone</i>
-		  <input id="work_phone" type="text" class="validate">
-		  <label for="work_phone">Work Phone</label>
-		</div>	      			
-		
-		<div class="input-field col s12">
-		  <i class="material-icons prefix">email</i>
-		  <input id="personal_email" type="email" class="validate">
-		  <label for="personal_email">Personal Email</label>
-		</div>
-		<div class="input-field col s12">
-		  <i class="material-icons prefix">business</i>
-		  <input id="work_email" type="email" class="validate">
-		  <label for="work_email">Work Email</label>
-		</div>	      		
-	      </div>
-	    </div>
-	  </form>
-	</div>	
-      </div>
-      <div class="modal-footer">
-	<a href="#!"
-	   class=" modal-action modal-close waves-effect waves-green btn-flat">
-	  Cancel
-	</a>	
-	<a href="#!"
-	   class=" modal-action modal-close waves-effect waves-green btn-flat">
-	  Submit
-	</a>
-      </div>
-    </div>    
-
-    <div class="fixed-action-btn vertical click-to-toggle">
-      <a class="btn-floating btn-large darken-3"
-	 style="background-color:#AA0114;">
-	<i class="material-icons">menu</i>
-      </a>
-      <ul>
-	<li>
-	  <form action="#">
-	    <div class="file-field input-field">
-	      <a class="btn-floating tooltipped"
-		 data-position="left"
-		 data-delay="50"
-		 data-tooltip="Import Contacts"
-		 style="background-color:#0072BC">
-		<input id="contactsUploadInput"
-		       class="contactsUpload" type="file"
-		       accept=".json">
-		<i class="material-icons">present_to_all</i>
-	      </a>
-	    </div>
-	  </form>	  	  
-	</li>	
-	<li>
-	  <a class="modal-trigger btn-floating tooltipped"
-	     data-position="left"
-	     data-delay="50"
-	     data-tooltip="New Contact"
-	     href="#newContactModal"
-	     style="background-color:#32CD32;">
-	    <i class="material-icons">
-	      playlist_add
-	    </i>
-	  </a>	  
-	</li>
-      </ul>
-    </div>    
-    
-    <div class="row">
+  <div class="container" style="padding:0px;border:0px;">     
+    <div class="row" id="newContactFormRow" style="display:none;">
       <div class="col s12">
-	<div class="row">
-          <div class="input-field col s12">	      	    
-            <i class="material-icons prefix">textsms</i>
-            <input type="text" id="autocomplete-input" class="autocomplete">
-            <label for="autocomplete-input">Search Contacts</label>
-          </div>
-	</div>
+	<form class="col s12">
+	  <div class="card-panel white">
+	    <div class="card-title">New Contact Form</div>
+	    <div class="row">
+	      <div class="input-field col s12">
+		<i class="tiny material-icons prefix">account_circle</i>
+		<input id="name" type="text" class="validate">
+		<label for="name">Name</label>
+	      </div>
+	      <div class="input-field col s12">
+		<i class="material-icons prefix">today</i>
+		<input id="birthday" type="date" class="datepicker">
+		<label for="birthday">Birthday</label>
+	      </div>
+
+	      <div class="input-field col s12">
+		<i class="material-icons prefix">speaker_phone</i>
+		<input id="mobile_phone" type="text" class="validate">
+		<label for="mobile_phone">Mobile Phone</label>
+	      </div>
+	      <div class="input-field col s12">
+		<i class="material-icons prefix">phone</i>
+		<input id="home_phone" type="text" class="validate">
+		<label for="home_phone">Home Phone</label>
+	      </div>
+	      <div class="input-field col s12">
+		<i class="material-icons prefix">contact_phone</i>
+		<input id="work_phone" type="text" class="validate">
+		<label for="work_phone">Work Phone</label>
+	      </div>	      			
+	      
+	      <div class="input-field col s12">
+		<i class="material-icons prefix">email</i>
+		<input id="personal_email" type="email" class="validate">
+		<label for="personal_email">Personal Email</label>
+	      </div>
+	      <div class="input-field col s12">
+		<i class="material-icons prefix">business</i>
+		<input id="work_email" type="email" class="validate">
+		<label for="work_email">Work Email</label>
+	      </div>	      		
+	    </div>
+	  </div>
+	</form>	  
       </div>
+    </div>
+    <div class="row" style="display:inline;">
       <div class="col s12 cards-container">
 	{{#each contactList}}
 	<div class="card white">

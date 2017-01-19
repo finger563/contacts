@@ -38,12 +38,6 @@ if(Meteor.isClient) {
 	$('.collapsible').collapsible();
 	$('.tooltipped').tooltip({delay: 50});    
 	var contactList = Template.contacts.__helpers[" contactList"]();
-	var autoCompleteData = {};
-	for (contact in contactList)
-	    autoCompleteData[contactList[contact]["name"]] = null;    
-	$('input.autocomplete').autocomplete({	
-	    data: autoCompleteData
-	});
 	Session.set("searchName", "");
     };
 
@@ -247,7 +241,7 @@ if(Meteor.isClient) {
 	
     });
 
-    Template.contacts.events({
+    Template.navigation.events({
 	'keypress input.autocomplete': function (event) {	
 	    if (event.which === 13) {
 		event.preventDefault();		
@@ -266,7 +260,6 @@ if(Meteor.isClient) {
 		}
 	    }
 	},
-
 	'change input.contactsUpload' : function(event) {
 	    var uploadedFile =
 		document.getElementById('contactsUploadInput').files[0];
@@ -297,6 +290,12 @@ if(Meteor.isClient) {
 	    }
 	    else 
 		alert("Failed to load file");
+	},
+	'click .newContactButton' : function(event) {
+	    $('#newContactFormRow').show();
+	},
+	'click .contactsUploadButton' : function(event) {	    
+	    $('#contactsUploadInput')[0].click();
 	}
     });
 
