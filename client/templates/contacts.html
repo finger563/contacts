@@ -48,13 +48,12 @@
 		
 		{{#if hasBirthday this.name}}
 		<a
-		  class="btn-floating btn-tiny waves-effect waves-light blue
-		  tooltipped"
-		  data-position="top" data-delay="50"
-		  data-tooltip="{{this.birthday}}"
+		  class="btn-floating btn-tiny waves-effect waves-light blue"
 		  href="#"
 		  target="_top">
-		  <i class="small material-icons">today</i>
+		  <span title="{{this.birthday}}">
+		    <i class="small material-icons">today</i>
+		  </span>
 		</a>
 		{{/if}}		
 

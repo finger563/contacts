@@ -4,7 +4,14 @@ if(Meteor.isClient) {
     Template.contacts.onCreated(function() {
 	$('ul.tabs').tabs();
 	$('.collapsible').collapsible();
-	$('.tooltipped').tooltip({delay: 50});    
+	$('.tooltipped').tooltip({delay: 50});
+	var contactList = Template.contacts.__helpers[" contactList"]();
+	var autoCompleteData = {};
+	for (contact in contactList)
+	    autoCompleteData[contactList[contact]["name"]] = null;    
+	$('input.autocomplete').autocomplete({	
+	    data: autoCompleteData
+	});	
 	WebFontConfig = {
 	    google: { families:
 		      [ 'Roboto Slab:700,400:latin',

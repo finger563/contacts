@@ -1,3 +1,4 @@
+
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
@@ -22,7 +23,5 @@ Router.route('/',
 	     }
 	    );
 
-Meteor.startup(function() {
-})
 
 
