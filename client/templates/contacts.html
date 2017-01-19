@@ -1,0 +1,127 @@
+<template name="contacts">
+  <style>
+    .sorting,
+    .sorting_asc,
+    .sorting_desc {
+    cursor:pointer;
+    }
+
+    .nameColumn {
+    width:100px;
+    }
+
+    .material-tooltip { white-space: pre; }
+  </style>
+  <div class="container">
+    <div class="row">
+      <div class="col s12">
+	<div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">textsms</i>
+            <input type="text" id="autocomplete-input" class="autocomplete">
+            <label for="autocomplete-input">Search</label>
+          </div>
+	</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12">
+	<ul class="tabs">
+          <li class="tab col s3"><a class="active" href="#cards">Cards</a></li>
+          <li class="tab col s3"><a href="#table">Table</a></li>
+	</ul>
+      </div>
+      <div id="table" class="col s12">
+	{{> ReactiveDatatable
+	tableData=reactiveDataFunction
+	options=optionsObject
+	}}      
+      </div>
+      <div id="cards" class="col s12">
+
+	{{#each contactList}}
+        <div class="col s4">
+          <div class="card white">
+            <div class="card-content black-text">
+	      <span class="card-title">{{this.name}}</span>
+	      <p>
+		
+		{{#if hasBirthday this.name}}
+		<a
+		  class="btn-floating btn-tiny waves-effect waves-light blue
+		  tooltipped"
+		  data-position="top" data-delay="50"
+		  data-tooltip="{{this.birthday}}"
+		  href="#"
+		  target="_top">
+		  <i class="small material-icons">today</i>
+		</a>
+		{{/if}}		
+
+		{{#if hasPersonalEmail this.name}}
+		<a
+		  class="btn-floating btn-tiny waves-effect waves-light blue
+		  tooltipped"
+		  data-position="top" data-delay="50"
+		  data-tooltip="{{this.email.personal}}"
+		  href="mailto:{{this.email.personal}}"
+		  target="_top">
+		  <i class="small material-icons">email</i>
+		</a>
+		{{/if}}
+
+		{{#if hasWorkEmail this.name}}
+		<a
+		  class="btn-floating btn-tiny waves-effect waves-light red
+		  tooltipped"
+		  data-position="top" data-delay="50"
+		  data-tooltip="{{this.email.work}}"			 
+		  href="mailto:{{this.email.work}}"
+		   target="_top">
+		  <i class="small material-icons">work</i>
+		</a>
+		{{/if}}
+
+		{{#if hasHomeAddress this.name}}
+		<a
+		  class="btn-floating btn-tiny waves-effect waves-light green tooltipped"
+		  href="https://maps.google.com/?q={{this.address.home.apartment}} {{this.address.home.street}} {{this.address.home.city}} {{this.address.home.state}} {{this.address.home.country}}"
+		  target="_blank"
+		  data-position="top" data-delay="50"
+		  data-tooltip="{{this.address.home.apartment}},
+{{this.address.home.street}},
+{{this.address.home.city}}, {{this.address.home.state}}, {{this.address.home.zip}},
+{{this.address.home.country}}">
+		  <i class="small material-icons">store</i>
+		</a>
+		{{/if}}
+
+		{{#if hasWorkAddress this.name}}
+		<a
+		  class="btn-floating btn-tiny waves-effect waves-light yellow tooltipped"
+		  href="https://maps.google.com/?q={{this.address.work.street}} {{this.address.work.city}} {{this.address.work.state}} {{this.address.work.country}}"
+		  target="_blank"
+		  data-position="top" data-delay="50"
+		  data-tooltip="{{this.address.work.street}},
+{{this.address.work.city}}, {{this.address.work.state}}, {{this.address.work.zip}},
+{{this.address.work.country}}">
+		  <i class="small material-icons">my_location</i>
+		</a>
+		{{/if}}			
+	      </p>
+            </div>
+          </div>
+        </div>
+	{{/each}}
+
+      </div>      
+    </div>    
+  </div>
+  <script>
+    $(document).ready(function(){
+    $('ul.tabs').tabs();
+    $('.collapsible').collapsible();
+    $('.tooltipped').tooltip({delay: 50});
+    });
+  </script>
+</template>
