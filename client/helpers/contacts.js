@@ -75,6 +75,20 @@ if(Meteor.isClient) {
 	    return findResult;
 	},
 
+	hasEmail(contactName) {
+	    for (id in Contacts.findOne("Contacts")["contacts"]) {
+		if(Contacts.findOne("Contacts")["contacts"][id]["name"]
+		   == contactName) {
+		    if(Contacts.findOne("Contacts")["contacts"][id]["email"]
+		       != undefined)
+			return true;
+		    else
+			return false;
+		}	    
+	    }
+	    return false;
+	},    	
+
 	hasPersonalEmail(contactName) {
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
 		if(Contacts.findOne("Contacts")["contacts"][id]["name"]
