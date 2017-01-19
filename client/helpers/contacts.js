@@ -262,7 +262,7 @@ if(Meteor.isClient) {
 	},
 	'change input.contactsUpload' : function(event) {
 	    var uploadedFile =
-		document.getElementById('contactsUploadInput').files[0];
+		document.getElementsByClassName('contactsUpload')[0].files[0];
 	    if (uploadedFile) {
 		var r = new FileReader();
 		r.onload = function(e) { 
@@ -295,7 +295,7 @@ if(Meteor.isClient) {
 	    $('#newContactFormRow').show();
 	},
 	'click .contactsUploadButton' : function(event) {	    
-	    $('#contactsUploadInput')[0].click();
+	    $('.contactsUpload')[0].click();
 	}
     });
 
