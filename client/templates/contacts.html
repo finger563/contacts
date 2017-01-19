@@ -1,4 +1,55 @@
 <template name="contacts">
+  <style>
+    // Media Query Ranges
+    $small-screen-up: 601px !default;
+    $medium-screen-up: 993px !default;
+    $large-screen-up: 1201px !default;
+    $small-screen: 600px !default;
+    $medium-screen: 992px !default;
+    $large-screen: 1200px !default;
+
+    $medium-and-up: "only screen and (min-width : #{$small-screen-up})" !default;
+    $large-and-up: "only screen and (min-width : #{$medium-screen-up})" !default;
+    $small-and-down: "only screen and (max-width : #{$small-screen})" !default;
+    $medium-and-down: "only screen and (max-width : #{$medium-screen})" !default;
+    $medium-only: "only screen and (min-width : #{$small-screen-up}) and (max-width : #{$medium-screen})" !default;
+
+    @mixin column-count($ct) {
+    -webkit-column-count: $ct;
+    -moz-column-count: $ct;
+    column-count: $ct;
+    }
+
+    .cards-container {
+    column-break-inside: avoid;
+    .card {
+    display: inline-block;
+    overflow: visible;
+    }
+    }
+
+    @media #{$small-and-down} {
+    .cards-container {
+    @include column-count(1);
+    }
+    }
+    @media #{$medium-and-up} {
+    .cards-container {
+    @include column-count(3);
+    }
+    }
+    @media #{$large-and-up} {
+    .cards-container {
+    @include column-count(3);
+    }
+    }
+
+
+    /// Styles for demo
+    .text-center {
+    text-align: center;
+    }    
+  </style>
   <div class="container">
     <div class="row">
       <div class="col s12">
@@ -29,8 +80,9 @@
 	{{#each contactList}}
 	<div class="card white col s6">
           <div class="card-content black-text">
-	    <span class="card-title">{{this.name}}</span>
-	    <p>
+	    <span class="card-title"
+		  style="font-size:14px;"><b>{{this.name}}</b></span>
+	    <p style="font-size:12px;">
 
 	      {{#if hasBirthday this.name}}
 	      <b>Birthday:&nbsp;</b>{{this.birthday}}
@@ -79,10 +131,9 @@
 	      </div>
 	      {{/if}}
 
-	      {{#if hasAddress this.name}}
+	      {{#if hasHomeAddress this.name}}
 	      <div class="row">
-		{{#if hasHomeAddress this.name}}
-		<div class="col s6">
+		<div class="col s12">
 		  <b>Home Address:</b><br>
 		  <a
 		    href="https://maps.google.com/?q={{this.address.home.street}}, {{this.address.home.city}}, {{this.address.home.state}}, {{this.address.home.country}}"
@@ -93,10 +144,12 @@
 		    {{this.address.home.zip}},&nbsp;{{this.address.home.country}}
 		  </a>
 		</div>
-		{{/if}}
-		
-		{{#if hasWorkEmail this.name}}
-		<div class="col s6">
+	      </div>
+	      {{/if}}
+	      
+	      {{#if hasWorkEmail this.name}}
+	      <div class="row">
+		<div class="col s12">
 		  <b>Work Address:</b><br>
 		  <a
 		    href="https://maps.google.com/?q={{this.address.work.street}} {{this.address.work.city}} {{this.address.work.state}} {{this.address.work.country}}"
@@ -106,7 +159,6 @@
 		    {{this.address.work.zip}},&nbsp;{{this.address.work.country}}
 		  </a>
 		</div>
-		{{/if}}
 	      </div>
 	      {{/if}}
 	    </p>
