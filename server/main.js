@@ -12,7 +12,6 @@ Meteor.startup(() => {
 	    {upsert : true}
 	);
     }
-    console.log(Contacts.findOne());
     Meteor.publish('contacts',
 		   function contactsPublication() {
 		       return Contacts.find({});
