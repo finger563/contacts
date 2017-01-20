@@ -299,4 +299,11 @@ if(Meteor.isClient) {
 	}
     });
 
+    Template.contacts.events({
+	'click .cancelButton' : function(event) {
+	    document.getElementsByClassName('newContactForm')[0].reset();
+	    $('#newContactFormRow').hide();	    
+	}
+    });
+
 }

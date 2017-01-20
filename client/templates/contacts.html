@@ -31,65 +31,190 @@
     }
     .text-center {
     text-align: center;
-    }
-
-    input.validate {
-    font-size:12px;
-    }
-
-    label {
-    font-size:14px;
-    }
+    }  
   </style>
-  <div class="container" style="padding:0px;border:0px;">     
+  <div class="container" style="padding:0px;border:0px;">
+
+    <!-- Start of New Contact Form Row -->
     <div class="row" id="newContactFormRow" style="display:none;">
       <div class="col s12">
-	<form class="col s12">
-	  <div class="card-panel white">
-	    <div class="card-title">New Contact Form</div>
-	    <div class="row">
-	      <div class="input-field col s12">
-		<i class="tiny material-icons prefix">account_circle</i>
-		<input id="name" type="text" class="validate">
-		<label for="name">Name</label>
-	      </div>
-	      <div class="input-field col s12">
-		<i class="material-icons prefix">today</i>
-		<input id="birthday" type="date" class="datepicker">
-		<label for="birthday">Birthday</label>
-	      </div>
 
-	      <div class="input-field col s12">
-		<i class="material-icons prefix">speaker_phone</i>
-		<input id="mobile_phone" type="text" class="validate">
-		<label for="mobile_phone">Mobile Phone</label>
-	      </div>
-	      <div class="input-field col s12">
-		<i class="material-icons prefix">phone</i>
-		<input id="home_phone" type="text" class="validate">
-		<label for="home_phone">Home Phone</label>
-	      </div>
-	      <div class="input-field col s12">
-		<i class="material-icons prefix">contact_phone</i>
-		<input id="work_phone" type="text" class="validate">
-		<label for="work_phone">Work Phone</label>
-	      </div>	      			
+	<!-- Start of New Contact Form -->
+	<form class="col s12 newContactForm">
+	  <div class="card white">
+	    <div class="card-content black-text">	    
+	      <span class="card-title">New Contact</span>
+
+	      <!-- Start of Name, Birthday Row -->
+	      <div class="row">
+		<div class="input-field col s6">
+		  <i class="tiny material-icons prefix">account_circle</i>
+		  <input id="name" type="text" class="validate">
+		  <label for="name">Name</label>
+		</div>
+		<div class="input-field col s6">
+		  <i class="material-icons prefix">today</i>
+		  <input id="birthday" type="date" class="datepicker">
+		  <label for="birthday">Birthday</label>
+		</div>
+		<!-- Start of Phone Numbers, Email Addresses Row -->
+		<div class="col s6">
+
+		  <div class="card white">
+		    <div class="card-content black-text">
+		      <span class="card-title">Phone Numbers</span>
+		      <div class="input-field">
+			<i class="material-icons prefix">speaker_phone</i>
+			<input id="mobile_phone" type="text" class="validate">
+			<label for="mobile_phone">Mobile Phone</label>
+		      </div>
+		      <div class="input-field">
+			<i class="material-icons prefix">phone</i>
+			<input id="home_phone" type="text" class="validate">
+			<label for="home_phone">Home Phone</label>
+		      </div>
+		      <div class="input-field">
+			<i class="material-icons prefix">contact_phone</i>
+			<input id="work_phone" type="text" class="validate">
+			<label for="work_phone">Work Phone</label>
+		      </div>
+		    </div>
+		  </div>
+		  
+		</div>
+		<div class="col s6">
+
+		  <div class="card white">
+		    <div class="card-content black-text">
+		      <span class="card-title">Email</span>	      
+		      
+		      <div class="input-field">
+			<i class="material-icons prefix">email</i>
+			<input id="personal_email" type="email" class="validate">
+			<label for="personal_email">Personal Email</label>
+		      </div>
+		      <div class="input-field">
+			<i class="material-icons prefix">email</i>
+			<input id="secondary_email" type="email"
+			       class="validate">
+			<label for="secondary_email">Secondary Email</label>
+		      </div>		    
+		      <div class="input-field">
+			<i class="material-icons prefix">business</i>
+			<input id="work_email" type="email" class="validate">
+			<label for="work_email">Work Email</label>
+		      </div>
+
+		    </div>
+		  </div>
+		</div>	      
+		
+		<!-- Start of Home, Work Address -->
+		<div class="col s6">
+
+		  <div class="card white">
+		    <div class="card-content black-text">
+		      <span class="card-title">Home Address</span>
+		      
+		      <div class="input-field">
+			<i class="material-icons prefix">home</i>
+			<input id="apartment" type="text" class="validate">
+			<label for="apartment">Apartment</label>
+		      </div>
+
+		      <div class="input-field">
+			<i class="material-icons prefix">directions</i>
+			<input id="street" type="text" class="validate">
+			<label for="street">Street</label>
+		      </div>
+		      <div class="row">
+			<div class="input-field col s6">
+			  <i class="material-icons prefix">location_city</i>
+			  <input id="city" type="text" class="validate">
+			  <label for="city">City</label>
+			</div>
+			<div class="input-field col s6">
+			  <i class="material-icons prefix">map</i>
+			  <input id="state" type="text" class="validate">
+			  <label for="state">State</label>
+			</div>
+		      </div>
+		      <div class="row">
+			<div class="input-field col s6">
+			  <i class="material-icons prefix">my_location</i>
+			  <input id="zip" type="text" class="validate">
+			  <label for="zip">Zip</label>
+			</div>		      
+			<div class="input-field col s6">
+			  <i class="material-icons prefix">public</i>
+			  <input id="country" type="text" class="validate">
+			  <label for="country">Country</label>
+			</div>		      
+		      </div>
+		      
+		    </div>
+		  </div>
+		  
+		</div>
+		<div class="col s6">
+		  <div class="card white">
+		    <div class="card-content black-text">		  
+		      <span class="card-title">Work Address</span>
+		      <div class="input-field">
+			<i class="material-icons prefix">business</i>
+			<input id="company" type="text" class="validate">
+			<label for="company">Company</label>
+		      </div>		  
+		      <div class="input-field">
+			<i class="material-icons prefix">directions</i>
+			<input id="street" type="text" class="validate">
+			<label for="street">Street</label>
+		      </div>
+		      <div class="row">
+			<div class="input-field col s6">
+			  <i class="material-icons prefix">location_city</i>
+			  <input id="city" type="text" class="validate">
+			  <label for="city">City</label>
+			</div>
+			<div class="input-field col s6">
+			  <i class="material-icons prefix">map</i>
+			  <input id="state" type="text" class="validate">
+			  <label for="state">State</label>
+			</div>
+		      </div>
+		      <div class="row">
+			<div class="input-field col s6">
+			  <i class="material-icons prefix">my_location</i>
+			  <input id="zip" type="text" class="validate">
+			  <label for="zip">Zip</label>
+			</div>		      
+			<div class="input-field col s6">
+			  <i class="material-icons prefix">public</i>
+			  <input id="country" type="text" class="validate">
+			  <label for="country">Country</label>
+			</div>		      
+		      </div>		      
+		    </div>
+		  </div>		  		  
+		</div> <!-- End of Home, Work Address -->
+
+		<div class="col s6">
+		  <a class="red waves-effect waves-light 
+			    btn saveButton">
+		    Save</a>		      
+		  <a class="red waves-effect waves-light 
+			    btn cancelButton">Cancel</a>
+		  <a href="#" class="btn-floating"
+		     style="visibility:hidden;"></a>	
+		</div>
+		
+	      </div> <!-- End of New Contact Form Row -->
 	      
-	      <div class="input-field col s12">
-		<i class="material-icons prefix">email</i>
-		<input id="personal_email" type="email" class="validate">
-		<label for="personal_email">Personal Email</label>
-	      </div>
-	      <div class="input-field col s12">
-		<i class="material-icons prefix">business</i>
-		<input id="work_email" type="email" class="validate">
-		<label for="work_email">Work Email</label>
-	      </div>	      		
-	    </div>
-	  </div>
-	</form>	  
+	    </div> <!-- End of New Contact Form Card Content -->
+	  </div> <!-- End of New Contact Form Card -->
+	</form>	<!-- End of New Contact Form -->
       </div>
-    </div>
+    </div> <!-- End of New Contact Form Row -->
     <div class="row" style="display:inline;">
       <div class="col s12 cards-container">
 	{{#each contactList}}
