@@ -2,16 +2,7 @@ if(Meteor.isClient) {
 
     // onCreated method for Contacts Template
     Template.contacts.onCreated(function() {
-	$('ul.tabs').tabs();
-	$('.collapsible').collapsible();
-	$('.tooltipped').tooltip({delay: 50});
 	var contactList = Contacts.findOne("Contacts")["contacts"];
-	var autoCompleteData = {};
-	for (contact in contactList)
-	    autoCompleteData[contactList[contact]["name"]] = null;    
-	$('input.autocomplete').autocomplete({	
-	    data: autoCompleteData
-	});	
 	WebFontConfig = {
 	    google: { families:
 		      [ 'Roboto Slab:700,400:latin',
@@ -34,9 +25,6 @@ if(Meteor.isClient) {
     });
 
     Template.contacts.rendered = function() {
-	$('ul.tabs').tabs();
-	$('.collapsible').collapsible();
-	$('.tooltipped').tooltip({delay: 50});    
 	var contactList = Template.contacts.__helpers[" contactList"]();
 	Session.set("searchName", "");
     };
