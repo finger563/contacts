@@ -49,7 +49,7 @@ if(Meteor.isClient) {
 		return Template.contacts.__helpers[" findContact"](searchString);
 	    }
 	    else
-		return Contacts.findOne("Contacts")["contacts"];		
+		return Contacts.findOne("Contacts")["contacts"];
 	},
 
 	contactListNames() {
@@ -303,6 +303,70 @@ if(Meteor.isClient) {
 	'click .cancelButton' : function(event) {
 	    document.getElementsByClassName('newContactForm')[0].reset();
 	    $('#newContactFormRow').hide();	    
+	},
+	'click .saveButton' : function(event) {
+	    var name = $('#name')[0].value;
+	    var birthday = $('#birthday')[0].value;
+
+	    var mobile_phone = $('#mobile_phone')[0].value;
+	    var home_phone = $('#home_phone')[0].value;
+	    var work_phone = $('#work_phone')[0].value;
+
+	    var personal_email = $('#personal_email')[0].value;
+	    var secondary_email = $('#secondary_email')[0].value;
+	    var work_email = $('#work_email')[0].value;
+
+	    var home_apartment = $('#home_apartment')[0].value;
+	    var home_street = $('#home_street')[0].value;
+	    var home_city = $('#home_city')[0].value;
+	    var home_state = $('#home_state')[0].value;
+	    var home_zip = $('#home_zip')[0].value;
+	    var home_country = $('#home_country')[0].value;
+
+	    var work_company = $('#work_company')[0].value;
+	    var work_street = $('#work_street')[0].value;
+	    var work_city = $('#work_city')[0].value;
+	    var work_state = $('#work_state')[0].value;
+	    var work_zip = $('#work_zip')[0].value;
+	    var work_country = $('#work_country')[0].value;
+
+	    var newContact =
+		{
+		    "name" : name,
+		    "birthday" : birthday,
+		    "email" : {
+			"personal" : personal_email,
+			"secondary" : secondary_email,
+			"work" : work_email
+		    },
+		    "phone" : {
+			"mobile" : mobile_phone,
+			"home" : home_phone,
+			"work" : work_phone
+		    },
+		    "address" : {
+			"home" : {
+			    "apartment" : home_apartment,
+			    "street" : home_street,
+			    "city" : home_city,
+			    "state" : home_state,
+			    "zip" : home_zip,
+			    "country" : home_country
+			},
+			"work" : {
+			    "company" : work_company,
+			    "street" : work_street,
+			    "city" : work_city,
+			    "state" : work_state,
+			    "zip" : work_zip,
+			    "country" : work_country
+			}			
+		    }
+		};
+	    console.log(newContact);
+
+	    document.getElementsByClassName('newContactForm')[0].reset();
+	    $('#newContactFormRow').hide();
 	}
     });
 
