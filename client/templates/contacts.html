@@ -24,13 +24,16 @@
     }
     @media only screen and (min-width: 1080px) {
     .cards-container {
-    -webkit-column-count: 2;
-    -moz-column-count: 2;
-    column-count: 2;
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
     }
     }
     .text-center {
     text-align: center;
+    }
+    div {
+    font-size: 12px;
     }
   </style>
   <div class="container" style="padding:0px;border:0px;">
@@ -47,33 +50,33 @@
 
 	      <!-- Start of Name, Birthday Row -->
 	      <div class="row">
-		<div class="input-field col s4">
+		<div class="input-field col s12 m6 l4">
 		  <i class="tiny material-icons prefix">account_circle</i>
 		  <input id="first_name" type="text" class="validate">
 		  <label for="first_name">First Name</label>
 		</div>
-		<div class="input-field col s4">
+		<div class="input-field col s12 m6 l4">
 		  <i class="tiny material-icons prefix">account_circle</i>
 		  <input id="middle_name" type="text" class="validate">
 		  <label for="middle_name">Middle Name</label>
 		</div>
-		<div class="input-field col s4">
+		<div class="input-field col s12 m6 l4">
 		  <i class="tiny material-icons prefix">account_circle</i>
 		  <input id="last_name" type="text" class="validate">
 		  <label for="last_name">Last Name</label>
 		</div>
-		<div class="input-field col s6">
+		<div class="input-field col s12 m6 l6">
 		  <i class="tiny material-icons prefix">account_circle</i>
 		  <input id="nickname" type="text" class="validate">
 		  <label for="nickname">Nickname</label>
 		</div>		
-		<div class="input-field col s6">
+		<div class="input-field col s12 m12 l6">
 		  <i class="material-icons prefix">today</i>
-		  <input id="birthday" type="date" class="datepicker">
+		  <input id="birthday" type="text">
 		  <label for="birthday">Birthday</label>
 		</div>
 		<!-- Start of Phone Numbers, Email Addresses Row -->
-		<div class="col s6">
+		<div class="col s12 m12 l6">
 
 		  <div class="card white">
 		    <div class="card-content black-text">
@@ -97,7 +100,7 @@
 		  </div>
 		  
 		</div>
-		<div class="col s6">
+		<div class="col s6 m12 l6">
 
 		  <div class="card white">
 		    <div class="card-content black-text">
@@ -126,7 +129,7 @@
 		</div>	      
 		
 		<!-- Start of Home, Work Address -->
-		<div class="col s6">
+		<div class="col s6 m12 l6">
 
 		  <div class="card white">
 		    <div class="card-content black-text">
@@ -172,7 +175,7 @@
 		  </div>
 		  
 		</div>
-		<div class="col s6">
+		<div class="col s6 m12 l6">
 		  <div class="card white">
 		    <div class="card-content black-text">		  
 		      <span class="card-title">Work Address</span>
@@ -278,7 +281,7 @@
 		    <div class="input-field col s12">
 		      <i class="material-icons prefix">today</i>
 		      <input id="birthday"
-			     type="date" class="datepicker"
+			     type="text"
 			     value="{{this.birthday}}">
 		      <label class="active" for="birthday">Birthday</label>
 		    </div>
@@ -493,8 +496,8 @@
 
 
     
-    <div class="row" style="display:inline;">
-      <div class="col s12 cards-container">
+    <div class="row">
+      <div class="col s12 m6 l6">
 	{{#each contactList}}
 	<div class="card white">
           <div class="card-content black-text">
@@ -510,74 +513,120 @@
 	    <p>
 	      <div class="row">
 
-		<div class="col s4">
-		  <b>First Name</b>
-		</div>
-		<div class="col s8">
-		  {{this.name.first}}
-		</div>
-		
-		<div class="col s4">
-		  <b>Last Name</b>
-		</div>
-		<div class="col s8">
-		  {{this.name.last}}
+		<!-- Start of Basic Info Card -->
+		<div class="col s12 m12 l12">
+		  <div class="card white">
+		    <div class="card-content black-text">
+		      <span class="card-title">General</span>		  
+
+		      <div class="row">
+			<div class="col s6">
+			  <b>First Name</b>
+			</div>
+			<div class="col s6">
+			  {{this.name.first}}
+			</div>
+			<div class="col s6">
+			  <b>Last Name</b>
+			</div>
+			<div class="col s6">
+			  {{this.name.last}}
+			</div>
+
+			<div class="col s6">
+			  <b>Birthday</b>
+			</div>
+			<div class="col s6">
+			  {{this.birthday}}
+			</div>
+			
+		      </div>
+		      
+		    </div>
+		  </div>
 		</div>
 
-		{{#if hasBirthday this.name.first
-		this.name.middle this.name.last }}		
-		<div class="col s4">
-		  <b>Birthday</b>
-		</div>
-		<div class="col s8">
-		  {{this.birthday}}
-		</div>
-		{{/if}}
+		<!-- Start of Phone Numbers Card -->
+		<div class="col s12 m12 l12">
+		  <div class="card white">
+		    <div class="card-content black-text">
+		      <span class="card-title">Phone Numbers</span>
 
-		{{#if hasPhone this.name.first
-		this.name.middle this.name.last }}
-		
-		{{#if hasMobilePhone this.name.first
-		this.name.middle this.name.last }}		
-		<div class="col s4">
-		  <b>Mobile Phone</b>
-		</div>
-		<div class="col s8">
-		  {{this.phone.mobile}}
-		</div>
-		{{/if}}
+		      <div class="row">
 
-		{{#if hasHomePhone this.name.first
-		this.name.middle this.name.last }}		
-		<div class="col s4">
-		  <b>Home Phone</b>
-		</div>
-		<div class="col s8">
-		  {{this.phone.home}}
-		</div>
-		{{/if}}
+			<div class="col s6">
+			  <b>Mobile</b>
+			</div>
+			<div class="col s6">
+			  {{this.phone.mobile}}
+			</div>
+			
+			<div class="col s6">
+			  <b>Home</b>
+			</div>
+			<div class="col s6">
+			  {{this.phone.home}}
+			</div>
 
-		{{#if hasWorkPhone this.name.first
-		this.name.middle this.name.last }}		
-		<div class="col s4">
-		  <b>Work Phone</b>
+			<div class="col s6">
+			  <b>Work</b>
+			</div>
+			<div class="col s6">
+			  {{this.phone.work}}
+			</div>			
+			
+		      </div>
+		      
+		    </div>
+		  </div>
 		</div>
-		<div class="col s8">
-		  {{this.phone.work}}
-		</div>
-		{{/if}}		
-		
-		{{/if}}
+
+		<!-- Start of Email Address Card -->
+		<div class="col s12 m12 l12">
+		  <div class="card white">
+		    <div class="card-content black-text">
+		      <span class="card-title">Email Addresses</span>
+
+		      <div class="row">
+
+			<div class="col s6">
+			  <b>Personal</b>
+			</div>
+			<div class="col s6">
+			  {{this.email.personal}}
+			</div>
+
+			<div class="col s6">
+			  <b>Secondary</b>
+			</div>
+			<div class="col s6">
+			  {{this.email.secondary}}
+			</div>
+
+			<div class="col s6">
+			  <b>Work</b>
+			</div>
+			<div class="col s6">
+			  {{this.email.work}}
+			</div>						
+			
+		      </div>
+		      
+		    </div>
+		  </div>
+		</div>		
+
+		<!-- 
 
 		{{#if hasEmail this.name.first
 		this.name.middle this.name.last}}
 
 		{{#if hasPersonalEmail this.name.first
 		this.name.middle this.name.last }}		
-		<div class="col s4">
+		<div class="col s3">
 		  <b>Personal Email</b>
 		</div>
-		<div class="col s8">
+		<div class="col s9">
 		  <a href="mailto:{{this.email.personal}}"
 		     target="_top" style="color:black;">
 		    {{this.email.personal}}
@@ -587,10 +636,10 @@
 
 		{{#if hasSecondaryEmail this.name.first
 		this.name.middle this.name.last }}		
-		<div class="col s4">
+		<div class="col s3">
 		  <b>Secondary Email</b>
 		</div>
-		<div class="col s8">
+		<div class="col s9">
 		  <a href="mailto:{{this.email.secondary}}"
 		     target="_top" style="color:black;">		  
 		    {{this.email.secondary}}
@@ -600,10 +649,10 @@
 
 		{{#if hasWorkEmail this.name.first
 		this.name.middle this.name.last }}		
-		<div class="col s4">
+		<div class="col s3">
 		  <b>Work Email</b>
 		</div>
-		<div class="col s8">
+		<div class="col s9">
 		  <a href="mailto:{{this.email.work}}"
 		     target="_top" style="color:black;">		  
 		    {{this.email.work}}
@@ -618,10 +667,10 @@
 
 		{{#if hasHomeAddress this.name.first
 		this.name.middle this.name.last }}		
-		<div class="col s4">
+		<div class="col s3">
 		  <b>Home Address</b>
 		</div>
-		<div class="col s8">
+		<div class="col s9">
 		  <a href="https://maps.google.com/?q={{this.address.home.street}}, {{this.address.home.city}}, {{this.address.home.state}}, {{this.address.home.country}}"
 		     target="_blank" style="color:black;">		  
 		    {{this.address.home.apartment}},<br>
@@ -634,10 +683,10 @@
 
 		{{#if hasWorkAddress this.name.first
 		this.name.middle this.name.last }}		
-		<div class="col s4">
+		<div class="col s3">
 		  <b>Work Address</b>
 		</div>
-		<div class="col s8">
+		<div class="col s9">
 		  <a href="https://maps.google.com/?q={{this.address.work.street}}, {{this.address.work.city}}, {{this.address.work.state}}, {{this.address.work.country}}"
 		     target="_blank" style="color:black;">		  
 		    {{this.address.work.company}},<br>
@@ -650,6 +699,8 @@
 		
 
 		{{/if}}
+
+		-->
 	      </div>
 	      
 	    </p>
@@ -662,14 +713,6 @@
   </div>    
   <script>
     $(document).ready(function(){
-    $('.datepicker').pickadate({
-    selectMonths: true,
-    selectYears: 100,
-    min: -310250,
-    max: true,
-    closeOnSelect: true,
-    closeOnClear: true,
-    });
     $('.modal').modal();
     });    
   </script>
