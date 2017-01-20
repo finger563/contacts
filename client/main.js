@@ -1,4 +1,3 @@
-
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
@@ -9,8 +8,7 @@ import './main.html';
 import '/imports/api/methods.js';
 
 Router.configure({
-    layoutTemplate: 'main',
-    loadingTemplate : 'loading'
+    layoutTemplate: 'main' 
 });
 
 Contacts = new Mongo.Collection('contacts');

@@ -14,5 +14,15 @@ Meteor.methods({
 			    "contacts" : contacts
 			},
 			{upsert : true});
-    }    
+    },
+   'SERVER.clearContacts' : function() {
+	var contacts = Contacts.findOne("Contacts")["contacts"];
+	contacts = [];
+	Contacts.update("Contacts",
+			{
+			    _id: "Contacts",
+			    "contacts" : contacts
+			},
+			{upsert : true});
+    }      
 });

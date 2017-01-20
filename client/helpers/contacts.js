@@ -349,7 +349,29 @@ if(Meteor.isClient) {
 	},
 	'click .contactsUploadButton' : function(event) {	    
 	    $('.contactsUpload')[0].click();
-	}
+	},
+	'click .exportContactsButton' : function(event) {
+	    var contacts = Contacts.findOne("Contacts")["contacts"];
+	    var dataString = "data:text/json;charset=utf-8,"
+		+ encodeURIComponent(JSON.stringify({"_id" : "Contacts",
+						     "contacts" : contacts},
+						    null, "\t"));
+	    var dlAnchorElem = document.getElementById('downloadContacts');
+	    dlAnchorElem.setAttribute("href", dataString);
+	    dlAnchorElem.setAttribute("download", "contacts.json");
+	    dlAnchorElem.click();
+	},
+	'click .clearContactsButton' : function(event) {	    
+	    Meteor.call('SERVER.clearContacts',
+			(err, res) => {
+			    if (err) {
+				alert(err);
+			    } else {
+				// success
+				location.reload();
+			    }
+			});		    	    
+	}	
     });
 
     Template.contacts.events({
@@ -357,6 +379,7 @@ if(Meteor.isClient) {
 	    document.getElementsByClassName('newContactForm')[0].reset();
 	    $('#newContactFormRow').hide();	    
 	},
+
 	'click .saveButton' : function(event) {
 	    var name = $('#name')[0].value;
 	    var birthday = $('#birthday')[0].value;
