@@ -2,10 +2,18 @@ if(Meteor.isClient) {
 
     // onCreated method for Contacts Template
     Template.contacts.onCreated(function() {
-	var contactList = Contacts.findOne("Contacts")["contacts"];
+	var contactObjectList = Contacts.findOne("Contacts")["contacts"];
 	var autoCompleteData = {};
-	for (contact in contactList)
-	    autoCompleteData[contactList[contact]["name"]] = null;
+	for (id in contactObjectList) {
+	    var first_name = contactObjectList[id]["name"]["first"];
+	    var middle_name = contactObjectList[id]["name"]["middle"];
+	    var last_name = contactObjectList[id]["name"]["last"];
+	    var key = "";
+	    (first_name != "")? key += first_name + " " : key = key;
+	    (middle_name != "")? key += middle_name + " " : key = key;
+	    (last_name != "")? key += last_name : key = key;
+	    autoCompleteData[key] = null;	    
+	}
 	if ($('input.autocomplete') != undefined) {
 	    if (typeof $('input.autocomplete').autocomplete == "function") {
 		$('input.autocomplete').autocomplete({	
@@ -39,7 +47,15 @@ if(Meteor.isClient) {
     };
 
     Template.contacts.helpers({
-	
+
+	getContactDisplayName(first_name, middle_name, last_name) {
+	    var key = "";
+	    (first_name != "")? key += first_name + " " : key = key;
+	    (middle_name != "")? key += middle_name + " " : key = key;
+	    (last_name != "")? key += last_name : key = key;
+	    return key;
+	},
+
 	contactList() {
 	    if (Session.get("searchName") != "") {
 		var searchString = Session.get("searchName");
@@ -53,7 +69,14 @@ if(Meteor.isClient) {
 	    var contactObjectList = Contacts.findOne("Contacts")["contacts"];
 	    var contactNameList = [];
 	    for (id in contactObjectList) {
-		contactNameList.push(contactObjectList[id]["name"]);
+		var first_name = contactObjectList[id]["name"]["first"];
+		var middle_name = contactObjectList[id]["name"]["middle"];
+		var last_name = contactObjectList[id]["name"]["last"];
+		var key = "";
+		(first_name != "")? key += first_name + " " : key = key;
+		(middle_name != "")? key += middle_name + " " : key = key;
+		(last_name != "")? key += last_name : key = key;
+		contactNameList.push(key);
 	    }
 	    return contactNameList;
 	},
@@ -62,16 +85,24 @@ if(Meteor.isClient) {
 	    var contactObjectList = Contacts.findOne("Contacts")["contacts"];
 	    var findResult = [];
 	    for (id in contactObjectList) {
-		if (contactObjectList[id]["name"] == contactName)
+		var first_name = contactObjectList[id]["name"]["first"];
+		var middle_name = contactObjectList[id]["name"]["middle"];
+		var last_name = contactObjectList[id]["name"]["last"];
+		var key = "";
+		(first_name != "")? key += first_name + " " : key = key;
+		(middle_name != "")? key += middle_name + " " : key = key;
+		(last_name != "")? key += last_name : key = key;
+		if (key == contactName)
 		    findResult.push(contactObjectList[id]);
 	    }
 	    return findResult;
 	},
 
-	hasPhone(contactName) {	    
+	hasPhone(first_name, middle_name, last_name) {	    
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
-		if(Contacts.findOne("Contacts")["contacts"][id]["name"]
-		   == contactName) {
+		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["middle"] == middle_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["last"] == last_name)) {
 		    if(Contacts.findOne("Contacts")["contacts"][id]["phone"]
 		       != undefined)
 			if((Contacts.findOne("Contacts")["contacts"][id]["phone"]["mobile"] != "") ||
@@ -83,10 +114,11 @@ if(Meteor.isClient) {
 	    return false;
 	},
 
-	hasHomePhone(contactName) {
+	hasHomePhone(first_name, middle_name, last_name) {
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
-		if(Contacts.findOne("Contacts")["contacts"][id]["name"]
-		   == contactName) {
+		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["middle"] == middle_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["last"] == last_name)) {
 		    if(Contacts.findOne("Contacts")["contacts"][id]["phone"]
 		       != undefined) {
 			if(Contacts.findOne("Contacts")["contacts"][id]["phone"]["home"] != undefined)
@@ -98,10 +130,11 @@ if(Meteor.isClient) {
 	    return false;
 	},
 
-	hasMobilePhone(contactName) {
+	hasMobilePhone(first_name, middle_name, last_name) {
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
-		if(Contacts.findOne("Contacts")["contacts"][id]["name"]
-		   == contactName) {
+		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["middle"] == middle_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["last"] == last_name)) {
 		    if(Contacts.findOne("Contacts")["contacts"][id]["phone"]
 		       != undefined) {
 			if(Contacts.findOne("Contacts")["contacts"][id]["phone"]["mobile"] != undefined)
@@ -113,10 +146,11 @@ if(Meteor.isClient) {
 	    return false;
 	},
 
-	hasWorkPhone(contactName) {
+	hasWorkPhone(first_name, middle_name, last_name) {
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
-		if(Contacts.findOne("Contacts")["contacts"][id]["name"]
-		   == contactName) {
+		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["middle"] == middle_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["last"] == last_name)) {
 		    if(Contacts.findOne("Contacts")["contacts"][id]["phone"]
 		       != undefined) {
 			if(Contacts.findOne("Contacts")["contacts"][id]["phone"]["work"] != undefined)
@@ -128,10 +162,11 @@ if(Meteor.isClient) {
 	    return false;
 	},			
 
-	hasEmail(contactName) {
+	hasEmail(first_name, middle_name, last_name) {
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
-		if(Contacts.findOne("Contacts")["contacts"][id]["name"]
-		   == contactName) {
+		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["middle"] == middle_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["last"] == last_name)) {
 		    if(Contacts.findOne("Contacts")["contacts"][id]["email"]
 		       != undefined)
 			if((Contacts.findOne("Contacts")["contacts"][id]["email"]["personal"] != "") ||
@@ -143,10 +178,11 @@ if(Meteor.isClient) {
 	    return false;
 	},    	
 
-	hasPersonalEmail(contactName) {
+	hasPersonalEmail(first_name, middle_name, last_name) {
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
-		if(Contacts.findOne("Contacts")["contacts"][id]["name"]
-		   == contactName) {
+		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["middle"] == middle_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["last"] == last_name)) {
 		    if(Contacts.findOne("Contacts")["contacts"][id]["email"]
 		       != undefined) {
 			if(Contacts.findOne("Contacts")["contacts"][id]["email"]["personal"] != undefined)
@@ -158,10 +194,11 @@ if(Meteor.isClient) {
 	    return false;
 	},
 
-	hasSecondaryEmail(contactName) {
+	hasSecondaryEmail(first_name, middle_name, last_name) {
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
-		if(Contacts.findOne("Contacts")["contacts"][id]["name"]
-		   == contactName) {
+		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["middle"] == middle_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["last"] == last_name)) {
 		    if(Contacts.findOne("Contacts")["contacts"][id]["email"]
 		       != undefined) {
 			if(Contacts.findOne("Contacts")["contacts"][id]["email"]["secondary"] != undefined)
@@ -173,10 +210,11 @@ if(Meteor.isClient) {
 	    return false;
 	},    	
 
-	hasWorkEmail(contactName) {
+	hasWorkEmail(first_name, middle_name, last_name) {
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
-		if(Contacts.findOne("Contacts")["contacts"][id]["name"]
-		   == contactName) {
+		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["middle"] == middle_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["last"] == last_name)) {
 		    if(Contacts.findOne("Contacts")["contacts"][id]["email"]
 		       != undefined) {		    
 			if(Contacts.findOne("Contacts")["contacts"][id]["email"]["work"] != undefined)
@@ -188,10 +226,11 @@ if(Meteor.isClient) {
 	    return false;
 	},
 
-	hasBirthday(contactName) {
+	hasBirthday(first_name, middle_name, last_name) {
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
-		if(Contacts.findOne("Contacts")["contacts"][id]["name"]
-		   == contactName) {
+		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["middle"] == middle_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["last"] == last_name)) {
 		    if(Contacts.findOne("Contacts")["contacts"][id]["birthday"]
 		       != undefined)
 			if(Contacts.findOne("Contacts")["contacts"][id]["birthday"] != "")			
@@ -201,10 +240,11 @@ if(Meteor.isClient) {
 	    return false;
 	},        
 
-	hasAddress(contactName) {
+	hasAddress(first_name, middle_name, last_name) {
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
-		if(Contacts.findOne("Contacts")["contacts"][id]["name"]
-		   == contactName) {
+		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["middle"] == middle_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["last"] == last_name)) {
 		    if(Contacts.findOne("Contacts")["contacts"][id]["address"]
 		       != undefined)
 			if(Contacts.findOne("Contacts")["contacts"][id]["address"] != {})			
@@ -214,10 +254,11 @@ if(Meteor.isClient) {
 	    return false;
 	},    
 
-	hasHomeAddress(contactName) {
+	hasHomeAddress(first_name, middle_name, last_name) {
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
-		if(Contacts.findOne("Contacts")["contacts"][id]["name"]
-		   == contactName) {
+		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["middle"] == middle_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["last"] == last_name)) {
 		    if(Contacts.findOne("Contacts")["contacts"][id]["address"]
 		       != undefined) {
 			if(Contacts.findOne("Contacts")["contacts"][id]["address"]["home"] != undefined)
@@ -234,10 +275,11 @@ if(Meteor.isClient) {
 	    return false;
 	},
 
-	hasWorkAddress(contactName) {
+	hasWorkAddress(first_name, middle_name, last_name) {
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
-		if(Contacts.findOne("Contacts")["contacts"][id]["name"]
-		   == contactName) {
+		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["middle"] == middle_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["last"] == last_name)) {
 		    if(Contacts.findOne("Contacts")["contacts"][id]["address"]
 		       != undefined) {
 			if(Contacts.findOne("Contacts")["contacts"][id]["address"]["work"] != undefined)
@@ -252,40 +294,6 @@ if(Meteor.isClient) {
 		}	    
 	    }
 	    return false;
-	},
-	
-	
-	reactiveDataFunction: function () {
-            return Template.contacts.__helpers[" contactList"];
-	},
-	
-	optionsObject : function() {
-	    var optionsObject = {
-		paging: false,
-		columns: [
-		    {
-			title: 'Name',
-			data: 'name', 
-			className: 'nameColumn'
-		    },
-		    {
-			title: 'Birthday',
-			data: 'birthday',
-			className: 'birthdayColumn'
-		    },
-		    {
-			title: 'Phone',
-			data: 'phone.mobile',
-			className: 'phoneColumn'
-		    },
-		    {
-			title: 'Email',
-			data: 'email.personal',
-			className: 'emailPersonalColumn'
-		    }
-		]
-	    }
-	    return optionsObject;
 	}
 	
     });
@@ -323,12 +331,21 @@ if(Meteor.isClient) {
 			    alert(err);
 			} else {
 			    // success!			    
-			    location.reload();
+			    //location.reload();
 			    var autoCompleteData = {};
 			    var contactList =
 				Contacts.findOne("Contacts")["contacts"];
-			    for (contact in contactList)
-				autoCompleteData[contactList[contact]["name"]] = null;    
+			    for (id in contactList) {
+				var first_name = contactList[id]["name"]["first"];
+				var middle_name = contactList[id]["name"]["middle"];
+				var last_name = contactList[id]["name"]["last"];
+				var key = "";
+				(first_name != "")? key += first_name + " " : key = key;
+				(middle_name != "")? key += middle_name + " " : key = key;
+				(last_name != "")? key += last_name : key = key;
+				autoCompleteData[key] = null;
+			    }
+			    console.log(autoCompleteData);
 			    if ($('input.autocomplete') != undefined) {
 				if (typeof $('input.autocomplete').autocomplete == "function") {
 				    $('input.autocomplete').autocomplete({	
@@ -381,7 +398,11 @@ if(Meteor.isClient) {
 	},
 
 	'click .saveButton' : function(event) {
-	    var name = $('#name')[0].value;
+	    var first_name = $('#first_name')[0].value;
+	    var middle_name = $('#middle_name')[0].value;
+	    var last_name = $('#last_name')[0].value;
+	    var nickname = $('#nickname')[0].value;
+	    
 	    var birthday = $('#birthday')[0].value;
 
 	    var mobile_phone = $('#mobile_phone')[0].value;
@@ -408,7 +429,12 @@ if(Meteor.isClient) {
 
 	    var newContact =
 		{
-		    "name" : name,
+		    "name" : {
+			"first" : first_name,
+			"middle" : middle_name,
+			"last" : last_name,
+			"nickname" : nickname
+		    },
 		    "birthday" : birthday,
 		    "email" : {
 			"personal" : personal_email,
@@ -443,7 +469,10 @@ if(Meteor.isClient) {
 	    var contacts = Contacts.findOne("Contacts")["contacts"];
 
 	    // Empty form check
-	    if ((name == "") &&
+	    if ((first_name == "") &&
+		(middle_name == "") &&
+		(last_name == "") &&
+		(nickname == "") &&
 		(birthday == "") &&
 		(personal_email == "") &&
 		(secondary_email == "") &&
@@ -468,7 +497,9 @@ if(Meteor.isClient) {
 
 	    // Name collision check
 	    for (id in contacts) {
-		if (name == contacts[id]["name"]) {
+		if ((first_name == contacts[id]["name"]["first"]) &&
+		    (middle_name == contacts[id]["name"]["middle"]) &&
+		    (last_name == contacts[id]["name"]["last"])) {
 		    Materialize.toast("Contact " + name + " already exists!",
 				      4000);
 		    Materialize.toast("Contact name must be unique!", 4000);
@@ -488,8 +519,16 @@ if(Meteor.isClient) {
 				var autoCompleteData = {};
 				var contactList =
 				    Contacts.findOne("Contacts")["contacts"];
-				for (contact in contactList)
-				    autoCompleteData[contactList[contact]["name"]] = null;    
+				for (id in contactList) {
+				    var first_name = contactList[id]["name"]["first"];
+				    var middle_name = contactList[id]["name"]["middle"];
+				    var last_name = contactList[id]["name"]["last"];
+				    var key = "";
+				    (first_name != "")? key += first_name + " " : key = key;
+				    (middle_name != "")? key += middle_name + " " : key = key;
+				    (last_name != "")? key += last_name : key = key;
+				    autoCompleteData[key] = null;
+				}
 				if ($('input.autocomplete') != undefined) {
 				    if (typeof $('input.autocomplete').autocomplete == "function") {
 					$('input.autocomplete').autocomplete({	

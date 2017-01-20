@@ -17,16 +17,16 @@
     }
     @media only screen and (min-width: 600px) {
     .cards-container {
-    -webkit-column-count: 2;
-    -moz-column-count: 2;
-    column-count: 2;
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
     }
     }
     @media only screen and (min-width: 1080px) {
     .cards-container {
-    -webkit-column-count: 3;
-    -moz-column-count: 3;
-    column-count: 3;
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
     }
     }
     .text-center {
@@ -47,11 +47,26 @@
 
 	      <!-- Start of Name, Birthday Row -->
 	      <div class="row">
+		<div class="input-field col s4">
+		  <i class="tiny material-icons prefix">account_circle</i>
+		  <input id="first_name" type="text" class="validate">
+		  <label for="first_name">First Name</label>
+		</div>
+		<div class="input-field col s4">
+		  <i class="tiny material-icons prefix">account_circle</i>
+		  <input id="middle_name" type="text" class="validate">
+		  <label for="middle_name">Middle Name</label>
+		</div>
+		<div class="input-field col s4">
+		  <i class="tiny material-icons prefix">account_circle</i>
+		  <input id="last_name" type="text" class="validate">
+		  <label for="last_name">Last Name</label>
+		</div>
 		<div class="input-field col s6">
 		  <i class="tiny material-icons prefix">account_circle</i>
-		  <input id="name" type="text" class="validate">
-		  <label for="name">Name</label>
-		</div>
+		  <input id="nickname" type="text" class="validate">
+		  <label for="nickname">Nickname</label>
+		</div>		
 		<div class="input-field col s6">
 		  <i class="material-icons prefix">today</i>
 		  <input id="birthday" type="date" class="datepicker">
@@ -90,7 +105,8 @@
 		      
 		      <div class="input-field">
 			<i class="material-icons prefix">email</i>
-			<input id="personal_email" type="email" class="validate">
+			<input id="personal_email"
+			       type="email" class="validate">
 			<label for="personal_email">Personal Email</label>
 		      </div>
 		      <div class="input-field">
@@ -222,103 +238,156 @@
           <div class="card-content black-text">
 	    <span class="card-title">
 	      <a href="#" class="editContact"
-		 style="color:teal">{{this.name}}</a>
+		 style="color:teal;">
+		{{getContactDisplayName this.name.first
+		this.name.middle this.name.last}}
+	      </a>
 	    </span>
 	    <p>
-
-	      {{#if hasBirthday this.name}}
-	      <b>Birthday:&nbsp;</b>{{this.birthday}}<br>
-	      {{/if}}
-
-	      {{#if hasPhone this.name}}	      
 	      <div class="row">
-		{{#if hasHomePhone this.name}}
-		<div class="col s12">
-		  <b>Home Phone:&nbsp;</b>{{this.phone.home}}
+
+		<div class="col s4">
+		  <b>First Name</b>
+		</div>
+		<div class="col s8">
+		  {{this.name.first}}
+		</div>
+		
+		<div class="col s4">
+		  <b>Last Name</b>
+		</div>
+		<div class="col s8">
+		  {{this.name.last}}
+		</div>
+
+		{{#if hasBirthday this.name.first
+		this.name.middle this.name.last }}		
+		<div class="col s4">
+		  <b>Birthday</b>
+		</div>
+		<div class="col s8">
+		  {{this.birthday}}
 		</div>
 		{{/if}}
-		{{#if hasMobilePhone this.name}}
-		<div class="col s12">
-		  <b>Mobile Phone:&nbsp;</b>{{this.phone.mobile}}
+
+		{{#if hasPhone this.name.first
+		this.name.middle this.name.last }}
+		
+		{{#if hasMobilePhone this.name.first
+		this.name.middle this.name.last }}		
+		<div class="col s4">
+		  <b>Mobile Phone</b>
+		</div>
+		<div class="col s8">
+		  {{this.phone.mobile}}
 		</div>
 		{{/if}}
-		{{#if hasWorkPhone this.name}}
-		<div class="col s12">
-		  <b>Work Phone:&nbsp;</b>{{this.phone.work}}
+
+		{{#if hasHomePhone this.name.first
+		this.name.middle this.name.last }}		
+		<div class="col s4">
+		  <b>Home Phone</b>
+		</div>
+		<div class="col s8">
+		  {{this.phone.home}}
+		</div>
+		{{/if}}
+
+		{{#if hasWorkPhone this.name.first
+		this.name.middle this.name.last }}		
+		<div class="col s4">
+		  <b>Work Phone</b>
+		</div>
+		<div class="col s8">
+		  {{this.phone.work}}
 		</div>
 		{{/if}}		
-	      </div>
-	      {{/if}}
+		
+		{{/if}}
 
-	      {{#if hasEmail this.name}}
-	      <div class="row">
-		{{#if hasPersonalEmail this.name}}
-		<div class="col s12">
-		  <b>Personal Email:&nbsp;</b>
+		{{#if hasEmail this.name.first
+		this.name.middle this.name.last}}
+
+		{{#if hasPersonalEmail this.name.first
+		this.name.middle this.name.last }}		
+		<div class="col s4">
+		  <b>Personal Email</b>
+		</div>
+		<div class="col s8">
 		  <a href="mailto:{{this.email.personal}}"
-		     target="_top"
-		     title="{{this.email.personal}}"
-		     style="color:black">
+		     target="_top" style="color:black;">
 		    {{this.email.personal}}
 		  </a>
 		</div>
 		{{/if}}
-		<br>
-		{{#if hasWorkEmail this.name}}
-		<div class="col s12">
-		  <b>Work Email:&nbsp;</b>
-		  <a href="mailto:{{this.email.work}}"
-		     target="_top"
-		     title="{{this.email.work}}"
-		     style="color:black">
-		    {{this.email.work}}
+
+		{{#if hasSecondaryEmail this.name.first
+		this.name.middle this.name.last }}		
+		<div class="col s4">
+		  <b>Secondary Email</b>
+		</div>
+		<div class="col s8">
+		  <a href="mailto:{{this.email.secondary}}"
+		     target="_top" style="color:black;">		  
+		    {{this.email.secondary}}
 		  </a>
 		</div>
 		{{/if}}
-	      </div>
-	      {{/if}}
 
-	      {{#if hasHomeAddress this.name}}
-	      <div class="row">
-		<div class="col s12">
-		  <b>Home Address:</b><br>
-		  <a
-		    href="https://maps.google.com/?q={{this.address.home.street}}, {{this.address.home.city}}, {{this.address.home.state}}, {{this.address.home.country}}"
-		    target="_blank" style="color:black">		    
+		{{#if hasWorkEmail this.name.first
+		this.name.middle this.name.last }}		
+		<div class="col s4">
+		  <b>Work Email</b>
+		</div>
+		<div class="col s8">
+		  <a href="mailto:{{this.email.work}}"
+		     target="_top" style="color:black;">		  
+		    {{this.email.work}}
+		  </a>		  
+		</div>
+		{{/if}}				
+
+		{{/if}}
+
+		{{#if hasHomeAddress this.name.first
+		this.name.middle this.name.last}}
+
+		{{#if hasHomeAddress this.name.first
+		this.name.middle this.name.last }}		
+		<div class="col s4">
+		  <b>Home Address</b>
+		</div>
+		<div class="col s8">
+		  <a href="https://maps.google.com/?q={{this.address.home.street}}, {{this.address.home.city}}, {{this.address.home.state}}, {{this.address.home.country}}"
+		     target="_blank" style="color:black;">		  
 		    {{this.address.home.apartment}},<br>
 		    {{this.address.home.street}},<br>
 		    {{this.address.home.city}},&nbsp;{{this.address.home.state}},<br>
-		    {{this.address.home.zip}},&nbsp;{{this.address.home.country}}
-		  </a>
+		    {{this.address.home.zip}},&nbsp;{{this.address.home.country}}		    
+		  </a>		  
 		</div>
-	      </div>
-	      {{/if}}
-	      
-	      {{#if hasWorkAddress this.name}}
-	      <div class="row">
-		<div class="col s12">
-		  <b>Work Address:</b><br>
-		  <a
-		    href="https://maps.google.com/?q={{this.address.work.company}} {{this.address.work.street}} {{this.address.work.city}} {{this.address.work.state}} {{this.address.work.country}}"
-		    target="_blank" style="color:black">		    
+		{{/if}}
+
+		{{#if hasWorkAddress this.name.first
+		this.name.middle this.name.last }}		
+		<div class="col s4">
+		  <b>Work Address</b>
+		</div>
+		<div class="col s8">
+		  <a href="https://maps.google.com/?q={{this.address.work.street}}, {{this.address.work.city}}, {{this.address.work.state}}, {{this.address.work.country}}"
+		     target="_blank" style="color:black;">		  
+		    {{this.address.work.company}},<br>
 		    {{this.address.work.street}},<br>
 		    {{this.address.work.city}},&nbsp;{{this.address.work.state}},<br>
-		    {{this.address.work.zip}},&nbsp;{{this.address.work.country}}
-		  </a>
+		    {{this.address.work.zip}},&nbsp;{{this.address.work.country}}		    
+		  </a>		  
 		</div>
-	      </div>
-	      {{/if}}
+		{{/if}}		
+		
 
-	      <div class="row">		
-		<!-- <a class="btn-floating delete-{{this.name}} waves-effect waves-light"
-		   style="float:right;">
-		  <i class="material-icons">clear</i>
-		</a>
-		<a class="btn-floating edit-{{this.name}} waves-effect waves-light"
-		   style="float:right;">
-		  <i class="material-icons">mode_edit</i>
-		</a> -->
+		{{/if}}
 	      </div>
+	      
 	    </p>
           </div>
 	</div>
