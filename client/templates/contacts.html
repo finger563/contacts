@@ -231,14 +231,266 @@
 	</form>	<!-- End of New Contact Form -->
       </div>
     </div> <!-- End of New Contact Form Row -->
+
+
+    <!-- Start of Edit Contact Form Row -->
+    <div id="editContactModal" class="modal">
+      <div class="modal-content">
+	<div class="row" id="editContactFormRow">
+	  <div class="col s12">
+
+	    {{#each getEditContact}}
+
+	    <!-- Start of Edit Contact Form -->
+	    <form class="col s12 editContactForm">
+	      <div class="card white">
+		<div class="card-content black-text">	    
+		  <span class="card-title">Edit Contact</span>
+
+		  <!-- Start of Name, Birthday Row -->
+		  <div class="row">
+		    <div class="input-field col s12">
+		      <i class="tiny material-icons prefix">account_circle</i>
+		      <input id="first_name" type="text"
+			     class="validate" value="{{this.name.first}}">
+		      <label class="active" for="first_name">First Name</label>
+		    </div>
+		    <div class="input-field col s12">
+		      <i class="tiny material-icons prefix">account_circle</i>
+		      <input id="middle_name"
+			     type="text" class="validate"
+			     value="{{this.name.middle}}">
+		      <label class="active" for="middle_name">Middle Name</label>
+		    </div>
+		    <div class="input-field col s12">
+		      <i class="tiny material-icons prefix">account_circle</i>
+		      <input id="last_name"
+			     type="text" class="validate"
+			     value="{{this.name.last}}">
+		      <label class="active" for="last_name">Last Name</label>
+		    </div>
+		    <div class="input-field col s12">
+		      <i class="tiny material-icons prefix">account_circle</i>
+		      <input id="nickname" type="text"
+			     class="validate" value="{{this.name.nickname}}">
+		      <label class="active" for="nickname">Nickname</label>
+		    </div>		
+		    <div class="input-field col s12">
+		      <i class="material-icons prefix">today</i>
+		      <input id="birthday"
+			     type="date" class="datepicker"
+			     value="{{this.birthday}}">
+		      <label class="active" for="birthday">Birthday</label>
+		    </div>
+		    <!-- Start of Phone Numbers, Email Addresses Row -->
+		    <div class="col s12">
+
+		      <div class="card white">
+			<div class="card-content black-text">
+			  <span class="card-title">Phone Numbers</span>
+			  <div class="input-field">
+			    <i class="material-icons prefix">speaker_phone</i>
+			    <input id="mobile_phone"
+				   type="text"
+				   class="validate"
+				   value="{{this.phone.mobile}}">
+			    <label class="active"
+				   for="mobile_phone">Mobile Phone</label>
+			  </div>
+			  <div class="input-field">
+			    <i class="material-icons prefix">phone</i>
+			    <input id="home_phone"
+				   type="text"
+				   class="validate"
+				   value="{{this.phone.home}}">
+			    <label class="active"
+				   for="home_phone">Home Phone</label>
+			  </div>
+			  <div class="input-field">
+			    <i class="material-icons prefix">contact_phone</i>
+			    <input id="work_phone"
+				   type="text" class="validate"
+				   value="{{this.phone.work}}">
+			    <label class="active"
+				   for="work_phone">Work Phone</label>
+			  </div>
+			</div>
+		      </div>
+		      
+		    </div>
+		    <div class="col s12">
+
+		      <div class="card white">
+			<div class="card-content black-text">
+			  <span class="card-title">Email</span>	      
+			  
+			  <div class="input-field">
+			    <i class="material-icons prefix">email</i>
+			    <input id="personal_email"
+				   type="email" class="validate"
+				   value="{{this.email.personal}}">
+			    <label class="active"
+				   for="personal_email">Personal Email</label>
+			  </div>
+			  <div class="input-field">
+			    <i class="material-icons prefix">email</i>
+			    <input id="secondary_email" type="email"
+				   class="validate"
+				   value="{{this.email.secondary}}">
+			    <label class="active"
+				   for="secondary_email">Secondary Email</label>
+			  </div>		    
+			  <div class="input-field">
+			    <i class="material-icons prefix">business</i>
+			    <input id="work_email"
+				   type="email" class="validate"
+				   value="{{this.email.email}}">
+			    <label class="active"
+				   for="work_email">Work Email</label>
+			  </div>
+
+			</div>
+		      </div>
+		    </div>	      
+		    
+		    <!-- Start of Home, Work Address -->
+		    <div class="col s12">
+
+		      <div class="card white">
+			<div class="card-content black-text">
+			  <span class="card-title">Home Address</span>
+			  
+			  <div class="input-field">
+			    <i class="material-icons prefix">home</i>
+			    <input id="home_apartment"
+				   type="text" class="validate">
+			    <label class="active"
+				   for="home_apartment">Apartment</label>
+			  </div>
+
+			  <div class="input-field">
+			    <i class="material-icons prefix">directions</i>
+			    <input id="home_street" type="text" class="validate">
+			    <label class="active"
+				   for="home_street">Street</label>
+			  </div>
+			  <div class="row">
+			    <div class="input-field col s6">
+			      <i class="material-icons prefix">location_city</i>
+			      <input id="home_city" type="text" class="validate">
+			      <label class="active" for="home_city">City</label>
+			    </div>
+			    <div class="input-field col s6">
+			      <i class="material-icons prefix">map</i>
+			      <input id="home_state"
+				     type="text" class="validate">
+			      <label class="active"
+				     for="home_state">State</label>
+			    </div>
+			  </div>
+			  <div class="row">
+			    <div class="input-field col s6">
+			      <i class="material-icons prefix">my_location</i>
+			      <input id="home_zip" type="text" class="validate">
+			      <label class="active" for="home_zip">Zip</label>
+			    </div>		      
+			    <div class="input-field col s6">
+			      <i class="material-icons prefix">public</i>
+			      <input id="home_country"
+				     type="text" class="validate">
+			      <label class="active"
+				     for="home_country">Country</label>
+			    </div>		      
+			  </div>
+			  
+			</div>
+		      </div>
+		      
+		    </div>
+		    <div class="col s12">
+		      <div class="card white">
+			<div class="card-content black-text">		  
+			  <span class="card-title">Work Address</span>
+			  <div class="input-field">
+			    <i class="material-icons prefix">business</i>
+			    <input id="work_company"
+				   type="text" class="validate">
+			    <label class="active"
+				   for="work_company">Company</label>
+			  </div>		  
+			  <div class="input-field">
+			    <i class="material-icons prefix">directions</i>
+			    <input id="work_street" type="text" class="validate">
+			    <label class="active"
+				   for="work_street">Street</label>
+			  </div>
+			  <div class="row">
+			    <div class="input-field col s6">
+			      <i class="material-icons prefix">location_city</i>
+			      <input id="work_city" type="text" class="validate">
+			      <label class="active" for="work_city">City</label>
+			    </div>
+			    <div class="input-field col s6">
+			      <i class="material-icons prefix">map</i>
+			      <input id="work_state"
+				     type="text" class="validate">
+			      <label class="active"
+				     for="work_state">State</label>
+			    </div>
+			  </div>
+			  <div class="row">
+			    <div class="input-field col s6">
+			      <i class="material-icons prefix">my_location</i>
+			      <input id="work_zip" type="text" class="validate">
+			      <label class="active" for="work_zip">Zip</label>
+			    </div>		      
+			    <div class="input-field col s6">
+			      <i class="material-icons prefix">public</i>
+			      <input id="work_country"
+				     type="text" class="validate">
+			      <label class="active"
+				     for="work_country">Country</label>
+			    </div>		      
+			  </div>		      
+			</div>
+		      </div>		  		  
+		    </div> <!-- End of Home, Work Address -->
+
+		    <div class="col s6">
+		      <a class="red waves-effect waves-light 
+				btn saveButton">
+			Save</a>		      
+		      <a class="red waves-effect waves-light 
+				btn cancelButton">Cancel</a>
+		      <a href="#" class="btn-floating"
+			 style="visibility:hidden;"></a>	
+		    </div>
+		    
+		  </div> <!-- End of Edit Contact Form Row -->
+		  
+		</div> <!-- End of Edit Contact Form Card Content -->
+	      </div> <!-- End of Edit Contact Form Card -->
+	    </form>	<!-- End of Edit Contact Form -->
+
+	    {{/each}}
+	    
+	  </div>
+	</div> <!-- End of Edit Contact Form Row -->
+      </div>
+    </div>
+
+
+    
     <div class="row" style="display:inline;">
       <div class="col s12 cards-container">
 	{{#each contactList}}
 	<div class="card white">
           <div class="card-content black-text">
 	    <span class="card-title">
-	      <a href="#" class="editContact"
-		 style="color:teal;">
+	      <a class="modal-trigger editContactTrigger"
+		 id="{{getContactDisplayName this.name.first
+		     this.name.middle this.name.last}}"
+		 href="#editContactModal">
 		{{getContactDisplayName this.name.first
 		this.name.middle this.name.last}}
 	      </a>
@@ -405,7 +657,8 @@
     max: true,
     closeOnSelect: true,
     closeOnClear: true,
-    });    
+    });
+    $('.modal').modal();
     });    
   </script>
 </template>

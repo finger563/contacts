@@ -98,6 +98,11 @@ if(Meteor.isClient) {
 	    return findResult;
 	},
 
+	getEditContact() {
+	    var contactName = Session.get("editContact");
+	    return Template.contacts.__helpers[" findContact"](contactName);
+	},
+
 	hasPhone(first_name, middle_name, last_name) {	    
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
 		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
@@ -395,6 +400,11 @@ if(Meteor.isClient) {
 	'click .cancelButton' : function(event) {
 	    document.getElementsByClassName('newContactForm')[0].reset();
 	    $('#newContactFormRow').hide();	    
+	},
+
+	'click .editContactTrigger' : function(event) {
+	    console.log(event.target.id);
+	    Session.set("editContact", event.target.id);
 	},
 
 	'click .saveButton' : function(event) {
