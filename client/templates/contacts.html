@@ -31,7 +31,7 @@
     }
     .text-center {
     text-align: center;
-    }  
+    }
   </style>
   <div class="container" style="padding:0px;border:0px;">
 
@@ -220,14 +220,17 @@
 	{{#each contactList}}
 	<div class="card white">
           <div class="card-content black-text">
-	    <span class="card-title">{{this.name}}</span>
+	    <span class="card-title">
+	      <a href="#" class="editContact"
+		 style="color:teal">{{this.name}}</a>
+	    </span>
 	    <p>
 
 	      {{#if hasBirthday this.name}}
-	      <b>Birthday:&nbsp;</b>{{this.birthday}}
+	      <b>Birthday:&nbsp;</b>{{this.birthday}}<br>
 	      {{/if}}
 
-	      {{#if hasPhone this.name}}
+	      {{#if hasPhone this.name}}	      
 	      <div class="row">
 		{{#if hasHomePhone this.name}}
 		<div class="col s12">
@@ -239,6 +242,11 @@
 		  <b>Mobile Phone:&nbsp;</b>{{this.phone.mobile}}
 		</div>
 		{{/if}}
+		{{#if hasWorkPhone this.name}}
+		<div class="col s12">
+		  <b>Work Phone:&nbsp;</b>{{this.phone.work}}
+		</div>
+		{{/if}}		
 	      </div>
 	      {{/if}}
 
@@ -286,12 +294,12 @@
 	      </div>
 	      {{/if}}
 	      
-	      {{#if hasWorkEmail this.name}}
+	      {{#if hasWorkAddress this.name}}
 	      <div class="row">
 		<div class="col s12">
 		  <b>Work Address:</b><br>
 		  <a
-		    href="https://maps.google.com/?q={{this.address.work.street}} {{this.address.work.city}} {{this.address.work.state}} {{this.address.work.country}}"
+		    href="https://maps.google.com/?q={{this.address.work.company}} {{this.address.work.street}} {{this.address.work.city}} {{this.address.work.state}} {{this.address.work.country}}"
 		    target="_blank" style="color:black">		    
 		    {{this.address.work.street}},<br>
 		    {{this.address.work.city}},&nbsp;{{this.address.work.state}},<br>
@@ -300,10 +308,22 @@
 		</div>
 	      </div>
 	      {{/if}}
+
+	      <div class="row">		
+		<!-- <a class="btn-floating delete-{{this.name}} waves-effect waves-light"
+		   style="float:right;">
+		  <i class="material-icons">clear</i>
+		</a>
+		<a class="btn-floating edit-{{this.name}} waves-effect waves-light"
+		   style="float:right;">
+		  <i class="material-icons">mode_edit</i>
+		</a> -->
+	      </div>
 	    </p>
           </div>
 	</div>
 	{{/each}}
+	
       </div>
     </div>      
   </div>    

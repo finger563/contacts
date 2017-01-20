@@ -1,7 +1,46 @@
 <template name="navigation">
+  <style>
+    nav {
+    height: 50px;
+    line-height: 50px;
+    }
+
+    nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
+    height: 50px;
+    line-height: 50px;
+    }
+
+    nav .button-collapse i {
+    height: 50px;
+    line-height: 50px;
+    }
+
+    nav .brand-logo { 
+    font-size: 1.6rem; 
+    }
+
+    @media only screen and (min-width: 601px){
+    nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+    height: 50px;
+    line-height: 50px;
+    }
+    }    
+  </style>
   <nav>
     <div class="nav-wrapper red">
-      <ul class="left">	
+      <a href="#" class="brand-logo left">&nbsp;contacts</a>
+      <form class="right col s12 searchForm"
+	    style="position:relative;z-index:9999;width:400px;">
+        <div class="input-field">
+          <input type="search" required
+		 id="autocomplete-input"
+		 class="autocomplete">
+          <label for="autocomplete-search">
+	    <i class="material-icons">search</i></label>	  
+          <i class="material-icons">close</i>
+        </div>
+      </form>       
+      <ul class="right">	
         <li class="newContactButton">
 	  <a href="#">
 	    <i class="material-icons" style="color:#fff;">add</i>
@@ -14,18 +53,7 @@
 	    <i class="material-icons" style="color:#fff;">present_to_all</i>
 	  </a>
 	</li>
-      </ul>
-      <form class="right col s12 searchForm"
-	    style="position:relative;z-index:9999;width:400px;">
-        <div class="input-field">
-          <input type="search" required
-		 id="autocomplete-input"
-		 class="autocomplete">
-          <label for="autocomplete-search">
-	    <i class="material-icons">search</i></label>	  
-          <i class="material-icons">close</i>
-        </div>
-      </form>       
+      </ul>      
     </div>
   </nav>
 </template>

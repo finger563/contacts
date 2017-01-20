@@ -77,7 +77,10 @@ if(Meteor.isClient) {
 		   == contactName) {
 		    if(Contacts.findOne("Contacts")["contacts"][id]["phone"]
 		       != undefined)
-			return true;
+			if((Contacts.findOne("Contacts")["contacts"][id]["phone"]["mobile"] != "") ||
+			   (Contacts.findOne("Contacts")["contacts"][id]["phone"]["home"] != "") ||
+			   (Contacts.findOne("Contacts")["contacts"][id]["phone"]["work"] != ""))
+			    return true;
 		}	    
 	    }
 	    return false;
@@ -90,7 +93,8 @@ if(Meteor.isClient) {
 		    if(Contacts.findOne("Contacts")["contacts"][id]["phone"]
 		       != undefined) {
 			if(Contacts.findOne("Contacts")["contacts"][id]["phone"]["home"] != undefined)
-			    return true;
+			    if(Contacts.findOne("Contacts")["contacts"][id]["phone"]["home"] != "")
+				return true;
 		    }
 		}	    
 	    }
@@ -104,12 +108,28 @@ if(Meteor.isClient) {
 		    if(Contacts.findOne("Contacts")["contacts"][id]["phone"]
 		       != undefined) {
 			if(Contacts.findOne("Contacts")["contacts"][id]["phone"]["mobile"] != undefined)
-			    return true;
+			    if(Contacts.findOne("Contacts")["contacts"][id]["phone"]["mobile"] != "")
+				return true;
 		    }
 		}	    
 	    }
 	    return false;
-	},		
+	},
+
+	hasWorkPhone(contactName) {
+	    for (id in Contacts.findOne("Contacts")["contacts"]) {
+		if(Contacts.findOne("Contacts")["contacts"][id]["name"]
+		   == contactName) {
+		    if(Contacts.findOne("Contacts")["contacts"][id]["phone"]
+		       != undefined) {
+			if(Contacts.findOne("Contacts")["contacts"][id]["phone"]["work"] != undefined)
+			    if(Contacts.findOne("Contacts")["contacts"][id]["phone"]["work"] != "")
+				return true;
+		    }
+		}	    
+	    }
+	    return false;
+	},			
 
 	hasEmail(contactName) {
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
@@ -117,7 +137,10 @@ if(Meteor.isClient) {
 		   == contactName) {
 		    if(Contacts.findOne("Contacts")["contacts"][id]["email"]
 		       != undefined)
-			return true;
+			if((Contacts.findOne("Contacts")["contacts"][id]["email"]["personal"] != "") ||
+			   (Contacts.findOne("Contacts")["contacts"][id]["email"]["secondary"] != "") ||
+			   (Contacts.findOne("Contacts")["contacts"][id]["email"]["email"] != ""))
+			    return true;
 		}	    
 	    }
 	    return false;
@@ -129,14 +152,29 @@ if(Meteor.isClient) {
 		   == contactName) {
 		    if(Contacts.findOne("Contacts")["contacts"][id]["email"]
 		       != undefined) {
-			if(Contacts.findOne("Contacts")["contacts"][id]["email"]["personal"]
-			   != undefined)
-			    return true;
+			if(Contacts.findOne("Contacts")["contacts"][id]["email"]["personal"] != undefined)
+			    if(Contacts.findOne("Contacts")["contacts"][id]["email"]["personal"] != "")	
+				return true;
 		    }
 		}	    
 	    }
 	    return false;
-	},    
+	},
+
+	hasSecondaryEmail(contactName) {
+	    for (id in Contacts.findOne("Contacts")["contacts"]) {
+		if(Contacts.findOne("Contacts")["contacts"][id]["name"]
+		   == contactName) {
+		    if(Contacts.findOne("Contacts")["contacts"][id]["email"]
+		       != undefined) {
+			if(Contacts.findOne("Contacts")["contacts"][id]["email"]["secondary"] != undefined)
+			    if(Contacts.findOne("Contacts")["contacts"][id]["email"]["secondary"] != "")
+				return true;
+		    }
+		}	    
+	    }
+	    return false;
+	},    	
 
 	hasWorkEmail(contactName) {
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
@@ -144,9 +182,9 @@ if(Meteor.isClient) {
 		   == contactName) {
 		    if(Contacts.findOne("Contacts")["contacts"][id]["email"]
 		       != undefined) {		    
-			if(Contacts.findOne("Contacts")["contacts"][id]["email"]["work"]
-			   != undefined)
-			    return true;
+			if(Contacts.findOne("Contacts")["contacts"][id]["email"]["work"] != undefined)
+			    if(Contacts.findOne("Contacts")["contacts"][id]["email"]["work"] != "")
+				return true;
 		    }
 		}	    
 	    }
@@ -159,7 +197,8 @@ if(Meteor.isClient) {
 		   == contactName) {
 		    if(Contacts.findOne("Contacts")["contacts"][id]["birthday"]
 		       != undefined)
-			return true;
+			if(Contacts.findOne("Contacts")["contacts"][id]["birthday"] != "")			
+			    return true;
 		}	    
 	    }
 	    return false;
@@ -171,7 +210,8 @@ if(Meteor.isClient) {
 		   == contactName) {
 		    if(Contacts.findOne("Contacts")["contacts"][id]["address"]
 		       != undefined)
-			return true;
+			if(Contacts.findOne("Contacts")["contacts"][id]["address"] != {})			
+			    return true;
 		}	    
 	    }
 	    return false;
@@ -184,7 +224,13 @@ if(Meteor.isClient) {
 		    if(Contacts.findOne("Contacts")["contacts"][id]["address"]
 		       != undefined) {
 			if(Contacts.findOne("Contacts")["contacts"][id]["address"]["home"] != undefined)
-			    return true;
+			    if((Contacts.findOne("Contacts")["contacts"][id]["address"]["home"]["apartment"] != "") &&
+			       (Contacts.findOne("Contacts")["contacts"][id]["address"]["home"]["street"] != "") &&
+			       (Contacts.findOne("Contacts")["contacts"][id]["address"]["home"]["city"] != "") &&
+			       (Contacts.findOne("Contacts")["contacts"][id]["address"]["home"]["state"] != "") &&
+			       (Contacts.findOne("Contacts")["contacts"][id]["address"]["home"]["zip"] != "") &&
+			       (Contacts.findOne("Contacts")["contacts"][id]["address"]["home"]["country"] != ""))
+				return true;
 		    }
 		}	    
 	    }
@@ -198,7 +244,13 @@ if(Meteor.isClient) {
 		    if(Contacts.findOne("Contacts")["contacts"][id]["address"]
 		       != undefined) {
 			if(Contacts.findOne("Contacts")["contacts"][id]["address"]["work"] != undefined)
-			    return true;
+			    if((Contacts.findOne("Contacts")["contacts"][id]["address"]["work"]["company"] != "") &&
+			       (Contacts.findOne("Contacts")["contacts"][id]["address"]["work"]["street"] != "") &&
+			       (Contacts.findOne("Contacts")["contacts"][id]["address"]["work"]["city"] != "") &&
+			       (Contacts.findOne("Contacts")["contacts"][id]["address"]["work"]["state"] != "") &&
+			       (Contacts.findOne("Contacts")["contacts"][id]["address"]["work"]["zip"] != "") &&
+			       (Contacts.findOne("Contacts")["contacts"][id]["address"]["work"]["country"] != ""))
+				return true;
 		    }
 		}	    
 	    }
@@ -363,7 +415,62 @@ if(Meteor.isClient) {
 			}			
 		    }
 		};
-	    console.log(newContact);
+
+	    var contacts = Contacts.findOne("Contacts")["contacts"];
+
+	    // Empty form check
+	    if ((name == "") &&
+		(birthday == "") &&
+		(personal_email == "") &&
+		(secondary_email == "") &&
+		(work_email == "") &&
+		(mobile_phone == "") &&
+		(home_phone == "") &&
+		(work_phone == "") &&
+		(home_apartment == "") &&
+		(home_street == "") &&
+		(home_city == "") &&
+		(home_state == "") &&
+		(home_country == "") &&
+		(work_company == "") &&
+		(work_street == "") &&
+		(work_city == "") &&
+		(work_state == "") &&
+		(work_country == "")) {
+		Materialize.toast("Contact is Empty. Nothing to save!",
+				  4000);
+		return;
+	    }	    
+
+	    // Name collision check
+	    for (id in contacts) {
+		if (name == contacts[id]["name"]) {
+		    Materialize.toast("Contact " + name + " already exists!",
+				      4000);
+		    Materialize.toast("Contact name must be unique!", 4000);
+		    return;
+		}
+	    }
+
+	    // Contact is not empty and there are no name collisions
+	    // Time to save contact
+	    Meteor.call('SERVER.addContact',
+			newContact,
+			(err, res) => {
+			    if (err) {
+				alert(err);
+			    } else {
+				// success!			    
+				var autoCompleteData = {};
+				var contactList =
+				    Contacts.findOne("Contacts")["contacts"];
+				for (contact in contactList)
+				    autoCompleteData[contactList[contact]["name"]] = null;    
+				$('input.autocomplete').autocomplete({	
+				    data: autoCompleteData
+				});			    
+			    }
+			});		    
 
 	    document.getElementsByClassName('newContactForm')[0].reset();
 	    $('#newContactFormRow').hide();
