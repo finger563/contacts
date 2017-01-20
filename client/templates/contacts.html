@@ -344,7 +344,7 @@
 			    <i class="material-icons prefix">business</i>
 			    <input id="work_email"
 				   type="email" class="validate"
-				   value="{{this.email.email}}">
+				   value="{{this.email.work}}">
 			    <label class="active"
 				   for="work_email">Work Email</label>
 			  </div>
@@ -363,27 +363,31 @@
 			  <div class="input-field">
 			    <i class="material-icons prefix">home</i>
 			    <input id="home_apartment"
-				   type="text" class="validate">
+				   type="text" class="validate"
+				   value="{{this.address.home.apartment}}">
 			    <label class="active"
 				   for="home_apartment">Apartment</label>
 			  </div>
 
 			  <div class="input-field">
 			    <i class="material-icons prefix">directions</i>
-			    <input id="home_street" type="text" class="validate">
+			    <input id="home_street" type="text" class="validate"
+				   value="{{this.address.home.street}}">
 			    <label class="active"
 				   for="home_street">Street</label>
 			  </div>
 			  <div class="row">
 			    <div class="input-field col s6">
 			      <i class="material-icons prefix">location_city</i>
-			      <input id="home_city" type="text" class="validate">
+			      <input id="home_city" type="text" class="validate"
+				     value="{{this.address.home.city}}">
 			      <label class="active" for="home_city">City</label>
 			    </div>
 			    <div class="input-field col s6">
 			      <i class="material-icons prefix">map</i>
 			      <input id="home_state"
-				     type="text" class="validate">
+				     type="text" class="validate"
+				     value="{{this.address.home.state}}">
 			      <label class="active"
 				     for="home_state">State</label>
 			    </div>
@@ -391,13 +395,15 @@
 			  <div class="row">
 			    <div class="input-field col s6">
 			      <i class="material-icons prefix">my_location</i>
-			      <input id="home_zip" type="text" class="validate">
+			      <input id="home_zip" type="text" class="validate"
+				     value="{{this.address.home.zip}}">
 			      <label class="active" for="home_zip">Zip</label>
 			    </div>		      
 			    <div class="input-field col s6">
 			      <i class="material-icons prefix">public</i>
 			      <input id="home_country"
-				     type="text" class="validate">
+				     type="text" class="validate"
+				     value="{{this.address.home.country}}">
 			      <label class="active"
 				     for="home_country">Country</label>
 			    </div>		      
@@ -414,26 +420,30 @@
 			  <div class="input-field">
 			    <i class="material-icons prefix">business</i>
 			    <input id="work_company"
-				   type="text" class="validate">
+				   type="text" class="validate"
+				   value="{{this.address.work.company}}">
 			    <label class="active"
 				   for="work_company">Company</label>
 			  </div>		  
 			  <div class="input-field">
 			    <i class="material-icons prefix">directions</i>
-			    <input id="work_street" type="text" class="validate">
+			    <input id="work_street" type="text" class="validate"
+				   value="{{this.address.work.street}}">
 			    <label class="active"
 				   for="work_street">Street</label>
 			  </div>
 			  <div class="row">
 			    <div class="input-field col s6">
 			      <i class="material-icons prefix">location_city</i>
-			      <input id="work_city" type="text" class="validate">
+			      <input id="work_city" type="text" class="validate"
+				     value="{{this.address.work.city}}">
 			      <label class="active" for="work_city">City</label>
 			    </div>
 			    <div class="input-field col s6">
 			      <i class="material-icons prefix">map</i>
 			      <input id="work_state"
-				     type="text" class="validate">
+				     type="text" class="validate"
+				     value="{{this.address.work.state}}">
 			      <label class="active"
 				     for="work_state">State</label>
 			    </div>
@@ -441,13 +451,15 @@
 			  <div class="row">
 			    <div class="input-field col s6">
 			      <i class="material-icons prefix">my_location</i>
-			      <input id="work_zip" type="text" class="validate">
+			      <input id="work_zip" type="text" class="validate"
+				     value="{{this.address.work.zip}}">
 			      <label class="active" for="work_zip">Zip</label>
 			    </div>		      
 			    <div class="input-field col s6">
 			      <i class="material-icons prefix">public</i>
 			      <input id="work_country"
-				     type="text" class="validate">
+				     type="text" class="validate"
+				     value="{{this.address.work.country}}">
 			      <label class="active"
 				     for="work_country">Country</label>
 			    </div>		      
