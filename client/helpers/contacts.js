@@ -3,6 +3,16 @@ if(Meteor.isClient) {
     // onCreated method for Contacts Template
     Template.contacts.onCreated(function() {
 	var contactList = Contacts.findOne("Contacts")["contacts"];
+	var autoCompleteData = {};
+	for (contact in contactList)
+	    autoCompleteData[contactList[contact]["name"]] = null;
+	if ($('input.autocomplete') != undefined) {
+	    if (typeof $('input.autocomplete').autocomplete == "function") {
+		$('input.autocomplete').autocomplete({	
+		    data: autoCompleteData
+		});
+	    }
+	}
 	WebFontConfig = {
 	    google: { families:
 		      [ 'Roboto Slab:700,400:latin',
@@ -25,7 +35,6 @@ if(Meteor.isClient) {
     });
 
     Template.contacts.rendered = function() {
-	var contactList = Template.contacts.__helpers[" contactList"]();
 	Session.set("searchName", "");
     };
 
@@ -320,9 +329,13 @@ if(Meteor.isClient) {
 				Contacts.findOne("Contacts")["contacts"];
 			    for (contact in contactList)
 				autoCompleteData[contactList[contact]["name"]] = null;    
-			    $('input.autocomplete').autocomplete({	
-				data: autoCompleteData
-			    });			    
+			    if ($('input.autocomplete') != undefined) {
+				if (typeof $('input.autocomplete').autocomplete == "function") {
+				    $('input.autocomplete').autocomplete({	
+					data: autoCompleteData
+				    });
+				}
+			    }
 			}
 		    });		    
 		}
@@ -454,9 +467,13 @@ if(Meteor.isClient) {
 				    Contacts.findOne("Contacts")["contacts"];
 				for (contact in contactList)
 				    autoCompleteData[contactList[contact]["name"]] = null;    
-				$('input.autocomplete').autocomplete({	
-				    data: autoCompleteData
-				});			    
+				if ($('input.autocomplete') != undefined) {
+				    if (typeof $('input.autocomplete').autocomplete == "function") {
+					$('input.autocomplete').autocomplete({	
+					    data: autoCompleteData
+					});
+				    }
+				}
 			    }
 			});		    
 

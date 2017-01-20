@@ -9,7 +9,8 @@ import './main.html';
 import '/imports/api/methods.js';
 
 Router.configure({
-    layoutTemplate: 'main'
+    layoutTemplate: 'main',
+    loadingTemplate : 'loading'
 });
 
 Contacts = new Mongo.Collection('contacts');
@@ -20,7 +21,7 @@ Router.route('/',
 		 template : 'contacts',
 		 waitOn: function () {
 		     return Meteor.subscribe('contacts', this.params._id);
-		 }
+		 }   		 
 	     }
 	    );
 
