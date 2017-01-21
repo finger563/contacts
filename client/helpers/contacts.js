@@ -1,5 +1,9 @@
 if(Meteor.isClient) {
 
+    function capitalizeFirstLetter(string) {
+	return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     // onCreated method for Contacts Template
     Template.contacts.onCreated(function() {
 	var contactObjectList = Contacts.findOne("Contacts")["contacts"];
@@ -54,6 +58,10 @@ if(Meteor.isClient) {
 	    (middle_name != "")? key += middle_name + " " : key = key;
 	    (last_name != "")? key += last_name : key = key;
 	    return key;
+	},
+
+	getEmailDomain(emailAddress) {
+	    return capitalizeFirstLetter(emailAddress.split('@')[1].split('.')[0]);
 	},
 
 	contactList() {

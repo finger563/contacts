@@ -8,7 +8,7 @@
     overflow: visible;
     }
 
-    @media only screen and (max-width: 400px) {
+    @media only screen and (max-width: 360px) {
     .cards-container {
     -webkit-column-count: 1;
     -moz-column-count: 1;
@@ -37,7 +37,7 @@
     font-size: 12px;
     }
   </style>
-  <div class="container" style="padding:0px;border:0px;">
+  <div class="container">
 
     <!-- Start of New Contact Form Row -->
     <div class="row" id="newContactFormRow" style="display:none;">
@@ -242,13 +242,8 @@
 	<div class="card white">
           <div class="card-content black-text">
 	    <span class="card-title">
-	      <a
-		id="{{getContactDisplayName this.name.first
-		    this.name.middle this.name.last}}"
-		 href="#">
-		{{getContactDisplayName this.name.first
-		this.name.middle this.name.last}}
-	      </a>
+	      {{getContactDisplayName this.name.first
+	      this.name.middle this.name.last}}
 	    </span>
 	    <p>	      
 	      <div class="row">
@@ -313,7 +308,7 @@
 		<div class="col s8 m8 l9">
 		  <a href="mailto:{{this.email.personal}}"
 		     target="_top" style="color: black;">		  
-		    {{this.email.personal}}
+		    {{getEmailDomain this.email.personal}}
 		  </a>
 		</div>		
 		{{/if}}
@@ -326,7 +321,7 @@
 		<div class="col s8 m8 l9">
 		  <a href="mailto:{{this.email.secondary}}"
 		     target="_top" style="color: black;">		  
-		    {{this.email.secondary}}
+		    {{getEmailDomain this.email.secondary}}
 		  </a>
 		</div>
 		{{/if}}
@@ -339,7 +334,7 @@
 		<div class="col s8 m8 l9">
 		  <a href="mailto:{{this.email.work}}"
 		     target="_top" style="color: black;">		  
-		    {{this.email.work}}
+		    {{getEmailDomain this.email.work}}
 		  </a>
 		</div>
 		{{/if}}				
