@@ -101,7 +101,204 @@ if(Meteor.isClient) {
 	getEditContact() {
 	    var contactName = Session.get("editContact");
 	    return Template.contacts.__helpers[" findContact"](contactName);
-	}	
+	},
+	hasPhone(first_name, middle_name, last_name) {	    
+	    for (id in Contacts.findOne("Contacts")["contacts"]) {
+		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["middle"] == middle_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["last"] == last_name)) {
+		    if(Contacts.findOne("Contacts")["contacts"][id]["phone"]
+		       != undefined)
+			if((Contacts.findOne("Contacts")["contacts"][id]["phone"]["mobile"] != "") ||
+			   (Contacts.findOne("Contacts")["contacts"][id]["phone"]["home"] != "") ||
+			   (Contacts.findOne("Contacts")["contacts"][id]["phone"]["work"] != ""))
+			    return true;
+		}	    
+	    }
+	    return false;
+	},
+
+	hasHomePhone(first_name, middle_name, last_name) {
+	    for (id in Contacts.findOne("Contacts")["contacts"]) {
+		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["middle"] == middle_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["last"] == last_name)) {
+		    if(Contacts.findOne("Contacts")["contacts"][id]["phone"]
+		       != undefined) {
+			if(Contacts.findOne("Contacts")["contacts"][id]["phone"]["home"] != undefined)
+			    if(Contacts.findOne("Contacts")["contacts"][id]["phone"]["home"] != "")
+				return true;
+		    }
+		}	    
+	    }
+	    return false;
+	},
+
+	hasMobilePhone(first_name, middle_name, last_name) {
+	    for (id in Contacts.findOne("Contacts")["contacts"]) {
+		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["middle"] == middle_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["last"] == last_name)) {
+		    if(Contacts.findOne("Contacts")["contacts"][id]["phone"]
+		       != undefined) {
+			if(Contacts.findOne("Contacts")["contacts"][id]["phone"]["mobile"] != undefined)
+			    if(Contacts.findOne("Contacts")["contacts"][id]["phone"]["mobile"] != "")
+				return true;
+		    }
+		}	    
+	    }
+	    return false;
+	},
+
+	hasWorkPhone(first_name, middle_name, last_name) {
+	    for (id in Contacts.findOne("Contacts")["contacts"]) {
+		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["middle"] == middle_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["last"] == last_name)) {
+		    if(Contacts.findOne("Contacts")["contacts"][id]["phone"]
+		       != undefined) {
+			if(Contacts.findOne("Contacts")["contacts"][id]["phone"]["work"] != undefined)
+			    if(Contacts.findOne("Contacts")["contacts"][id]["phone"]["work"] != "")
+				return true;
+		    }
+		}	    
+	    }
+	    return false;
+	},			
+
+	hasEmail(first_name, middle_name, last_name) {
+	    for (id in Contacts.findOne("Contacts")["contacts"]) {
+		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["middle"] == middle_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["last"] == last_name)) {
+		    if(Contacts.findOne("Contacts")["contacts"][id]["email"]
+		       != undefined)
+			if((Contacts.findOne("Contacts")["contacts"][id]["email"]["personal"] != "") ||
+			   (Contacts.findOne("Contacts")["contacts"][id]["email"]["secondary"] != "") ||
+			   (Contacts.findOne("Contacts")["contacts"][id]["email"]["email"] != ""))
+			    return true;
+		}	    
+	    }
+	    return false;
+	},    	
+
+	hasPersonalEmail(first_name, middle_name, last_name) {
+	    for (id in Contacts.findOne("Contacts")["contacts"]) {
+		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["middle"] == middle_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["last"] == last_name)) {
+		    if(Contacts.findOne("Contacts")["contacts"][id]["email"]
+		       != undefined) {
+			if(Contacts.findOne("Contacts")["contacts"][id]["email"]["personal"] != undefined)
+			    if(Contacts.findOne("Contacts")["contacts"][id]["email"]["personal"] != "")	
+				return true;
+		    }
+		}	    
+	    }
+	    return false;
+	},
+
+	hasSecondaryEmail(first_name, middle_name, last_name) {
+	    for (id in Contacts.findOne("Contacts")["contacts"]) {
+		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["middle"] == middle_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["last"] == last_name)) {
+		    if(Contacts.findOne("Contacts")["contacts"][id]["email"]
+		       != undefined) {
+			if(Contacts.findOne("Contacts")["contacts"][id]["email"]["secondary"] != undefined)
+			    if(Contacts.findOne("Contacts")["contacts"][id]["email"]["secondary"] != "")
+				return true;
+		    }
+		}	    
+	    }
+	    return false;
+	},    	
+
+	hasWorkEmail(first_name, middle_name, last_name) {
+	    for (id in Contacts.findOne("Contacts")["contacts"]) {
+		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["middle"] == middle_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["last"] == last_name)) {
+		    if(Contacts.findOne("Contacts")["contacts"][id]["email"]
+		       != undefined) {		    
+			if(Contacts.findOne("Contacts")["contacts"][id]["email"]["work"] != undefined)
+			    if(Contacts.findOne("Contacts")["contacts"][id]["email"]["work"] != "")
+				return true;
+		    }
+		}	    
+	    }
+	    return false;
+	},
+
+	hasBirthday(first_name, middle_name, last_name) {
+	    for (id in Contacts.findOne("Contacts")["contacts"]) {
+		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["middle"] == middle_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["last"] == last_name)) {
+		    if(Contacts.findOne("Contacts")["contacts"][id]["birthday"]
+		       != undefined)
+			if(Contacts.findOne("Contacts")["contacts"][id]["birthday"] != "")			
+			    return true;
+		}	    
+	    }
+	    return false;
+	},        
+
+	hasAddress(first_name, middle_name, last_name) {
+	    for (id in Contacts.findOne("Contacts")["contacts"]) {
+		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["middle"] == middle_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["last"] == last_name)) {
+		    if(Contacts.findOne("Contacts")["contacts"][id]["address"]
+		       != undefined)
+			if(Contacts.findOne("Contacts")["contacts"][id]["address"] != {})			
+			    return true;
+		}	    
+	    }
+	    return false;
+	},    
+
+	hasHomeAddress(first_name, middle_name, last_name) {
+	    for (id in Contacts.findOne("Contacts")["contacts"]) {
+		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["middle"] == middle_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["last"] == last_name)) {
+		    if(Contacts.findOne("Contacts")["contacts"][id]["address"]
+		       != undefined) {
+			if(Contacts.findOne("Contacts")["contacts"][id]["address"]["home"] != undefined)
+			    if((Contacts.findOne("Contacts")["contacts"][id]["address"]["home"]["apartment"] != "") &&
+			       (Contacts.findOne("Contacts")["contacts"][id]["address"]["home"]["street"] != "") &&
+			       (Contacts.findOne("Contacts")["contacts"][id]["address"]["home"]["city"] != "") &&
+			       (Contacts.findOne("Contacts")["contacts"][id]["address"]["home"]["state"] != "") &&
+			       (Contacts.findOne("Contacts")["contacts"][id]["address"]["home"]["zip"] != "") &&
+			       (Contacts.findOne("Contacts")["contacts"][id]["address"]["home"]["country"] != ""))
+				return true;
+		    }
+		}	    
+	    }
+	    return false;
+	},
+
+	hasWorkAddress(first_name, middle_name, last_name) {
+	    for (id in Contacts.findOne("Contacts")["contacts"]) {
+		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["middle"] == middle_name) &&
+		   (Contacts.findOne("Contacts")["contacts"][id]["name"]["last"] == last_name)) {
+		    if(Contacts.findOne("Contacts")["contacts"][id]["address"]
+		       != undefined) {
+			if(Contacts.findOne("Contacts")["contacts"][id]["address"]["work"] != undefined)
+			    if((Contacts.findOne("Contacts")["contacts"][id]["address"]["work"]["company"] != "") &&
+			       (Contacts.findOne("Contacts")["contacts"][id]["address"]["work"]["street"] != "") &&
+			       (Contacts.findOne("Contacts")["contacts"][id]["address"]["work"]["city"] != "") &&
+			       (Contacts.findOne("Contacts")["contacts"][id]["address"]["work"]["state"] != "") &&
+			       (Contacts.findOne("Contacts")["contacts"][id]["address"]["work"]["zip"] != "") &&
+			       (Contacts.findOne("Contacts")["contacts"][id]["address"]["work"]["country"] != ""))
+				return true;
+		    }
+		}	    
+	    }
+	    return false;
+	}
     });
 
     Template.navigation.events({
@@ -137,28 +334,7 @@ if(Meteor.isClient) {
 			    alert(err);
 			} else {
 			    // success!			    
-			    //location.reload();
-			    var autoCompleteData = {};
-			    var contactList =
-				Contacts.findOne("Contacts")["contacts"];
-			    for (id in contactList) {
-				var first_name = contactList[id]["name"]["first"];
-				var middle_name = contactList[id]["name"]["middle"];
-				var last_name = contactList[id]["name"]["last"];
-				var key = "";
-				(first_name != "")? key += first_name + " " : key = key;
-				(middle_name != "")? key += middle_name + " " : key = key;
-				(last_name != "")? key += last_name : key = key;
-				autoCompleteData[key] = null;
-			    }
-			    console.log(autoCompleteData);
-			    if ($('input.autocomplete') != undefined) {
-				if (typeof $('input.autocomplete').autocomplete == "function") {
-				    $('input.autocomplete').autocomplete({	
-					data: autoCompleteData
-				    });
-				}
-			    }
+			    location.reload();
 			}
 		    });		    
 		}
