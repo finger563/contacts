@@ -242,80 +242,90 @@
 	<div class="card white">
           <div class="card-content black-text">
 	    <span class="card-title">
-	      <a class="modal-trigger editContactTrigger"
-		 id="{{getContactDisplayName this.name.first
-		     this.name.middle this.name.last}}"
-		 href="#editContactModal" style="font-size:18px;">
+	      <a
+		id="{{getContactDisplayName this.name.first
+		    this.name.middle this.name.last}}"
+		 href="#">
 		{{getContactDisplayName this.name.first
 		this.name.middle this.name.last}}
 	      </a>
 	    </span>
 	    <p>	      
 	      <div class="row">
+
+		<h6>General</h6>
+		
 		{{#if hasBirthday this.name.first
 		this.name.middle this.name.last }}		
-		<div class="col s12">
-		  <i class="material-icons prefix"
-		     style="font-size:18px;">cake</i>
-		  {{this.birthday}}
+		<div class="col s4 m4 l3">
+		  <b>Birthday</b>
 		</div>
-		<br>
+		<div class="col s8 m8 l9">
+		  <div contenteditable>{{this.birthday}}</div>
+		</div>		
 		{{/if}}
-
+		<hr>
+		
 		{{#if hasPhone this.name.first
 		this.name.middle this.name.last }}
+		<h6>Phone</h6>
 		
 		{{#if hasMobilePhone this.name.first
 		this.name.middle this.name.last }}		
-		<div class="col s12">
-		  <i class="material-icons prefix"
-		     style="font-size:18px;">textsms</i>		  
+		<div class="col s4 m4 l3">
+		  <b>Mobile</b>
+		</div>
+		<div class="col s8 m8 l9">
 		  {{this.phone.mobile}}
 		</div>
 		{{/if}}
 
 		{{#if hasHomePhone this.name.first
 		this.name.middle this.name.last }}		
-		<div class="col s12">
-		  <i class="material-icons prefix"
-		     style="font-size:18px;">home</i>		  
+		<div class="col s4 m4 l3">
+		  <b>Home</b>
+		</div>
+		<div class="col s8 m8 l9">
 		  {{this.phone.home}}
 		</div>
 		{{/if}}		
 
 		{{#if hasWorkPhone this.name.first
 		this.name.middle this.name.last }}		
-		<div class="col s12">
-		  <i class="material-icons prefix"
-		     style="font-size:18px;">business</i>		  
+		<div class="col s4 m4 l3">
+		  <b>Work</b>
+		</div>
+		<div class="col s8 m8 l9">
 		  {{this.phone.work}}
 		</div>
 		{{/if}}		
-		
+		<hr>
 		{{/if}}
 
 		{{#if hasEmail this.name.first
 		this.name.middle this.name.last}}
-
+		<h6>E-mail</h6>
 		{{#if hasPersonalEmail this.name.first
-		this.name.middle this.name.last }}		
-		<div class="col s12">
-		  <i class="material-icons prefix"
-		     style="font-size:18px;">email</i>		  
+		this.name.middle this.name.last }}
+		<div class="col s4 m4 l3">
+		  <b>Personal</b>
+		</div>
+		<div class="col s8 m8 l9">
 		  <a href="mailto:{{this.email.personal}}"
-		     target="_top" style="color: black;">
+		     target="_top" style="color: black;">		  
 		    {{this.email.personal}}
 		  </a>
-		</div>
+		</div>		
 		{{/if}}
 
 		{{#if hasSecondaryEmail this.name.first
 		this.name.middle this.name.last }}		
-		<div class="col s12">
-		  <i class="material-icons prefix"
-		     style="font-size:18px;">mail_outline</i>		  
+		<div class="col s4 m4 l3">
+		  <b>Secondary</b>
+		</div>
+		<div class="col s8 m8 l9">
 		  <a href="mailto:{{this.email.secondary}}"
-		     target="_top" style="color: black;">
+		     target="_top" style="color: black;">		  
 		    {{this.email.secondary}}
 		  </a>
 		</div>
@@ -323,45 +333,56 @@
 
 		{{#if hasWorkEmail this.name.first
 		this.name.middle this.name.last }}		
-		<div class="col s12">
-		  <i class="material-icons prefix"
-		     style="font-size:18px;">contact_mail</i>		  
+		<div class="col s4 m4 l3">
+		  <b>Work</b>
+		</div>
+		<div class="col s8 m8 l9">
 		  <a href="mailto:{{this.email.work}}"
-		     target="_top" style="color: black;">
+		     target="_top" style="color: black;">		  
 		    {{this.email.work}}
 		  </a>
 		</div>
 		{{/if}}				
-
+		<hr>		
 		{{/if}}
 
 		{{#if hasAddress this.name.first
 		this.name.middle this.name.last}}
-
+		<h6>Address</h6>
 		{{#if hasHomeAddress this.name.first
-		this.name.middle this.name.last }}		
-		<div class="col s12">
-		  <i class="material-icons prefix"
-		     style="font-size:18px;">home</i>		  
+		this.name.middle this.name.last }}
+		<div class="col s4 m4 l3">
+		  <b>Home</b>
+		</div>
+		<div class="col s8 m8 l9">
 		  <a href="https://maps.google.com/?q={{this.address.home.street}}, {{this.address.home.city}}, {{this.address.home.state}}, {{this.address.home.country}}"
 		     target="_blank" style="color:black;">
-		    {{this.address.home.street}},&nbsp;{{this.address.home.city}}
+		    {{this.address.home.apartment}},<br>
+		    {{this.address.home.street}},<br>
+		    {{this.address.home.city}},&nbsp;{{this.address.home.state}}
+		    ,<br>{{this.address.home.zip}},&nbsp;
+		    {{this.address.home.country}}
 		  </a>
-		</div>
+		</div>		
 		{{/if}}			
 
 		{{#if hasWorkAddress this.name.first
 		this.name.middle this.name.last }}		
-		<div class="col s12">
-		  <i class="material-icons prefix"
-		     style="font-size:18px;">location_city</i>		  
+		<div class="col s4 m4 l3">
+		  <b>Work</b>
+		</div>
+		<div class="col s8 m8 l9">		  
 		  <a href="https://maps.google.com/?q={{this.address.work.street}}, {{this.address.work.city}}, {{this.address.work.state}}, {{this.address.work.country}}"
 		     target="_blank" style="color:black;">
-		    {{this.address.work.street}},&nbsp;{{this.address.work.city}}
+		    {{this.address.work.company}},<br>
+		    {{this.address.work.street}},<br>
+		    {{this.address.work.city}},&nbsp;{{this.address.work.state}}
+		    ,<br>{{this.address.work.zip}},&nbsp;
+		    {{this.address.work.country}}
 		  </a>		  
 		</div>
 		{{/if}}		
-		
+		<hr>
 		{{/if}}
 
 		
