@@ -541,6 +541,33 @@ if(Meteor.isClient) {
 	    $('.button-collapse').sideNav('hide');
 	},
 
+	'click .deleteButton-edit' : function(event) {
+	    var contactBeingDeleted = Session.get('editContact');
+	    var contacts = Contacts.findOne("Contacts")["contacts"];
+	    for (id in contacts) {
+		var key = "";
+		(contacts[id]["name"]["first"] != "")? key += contacts[id]["name"]["first"] + " " : key = key;
+		(contacts[id]["name"]["middle"] != "")? key += contacts[id]["name"]["middle"] + " " : key = key;
+		(contacts[id]["name"]["last"] != "")? key += contacts[id]["name"]["last"] : key = key;	    
+		
+		if (key == contactBeingDeleted) {
+		    contacts.splice(id, 1);
+		    break;
+		}
+	    }
+	    Meteor.call('SERVER.saveContacts',
+			contacts,
+			(err, res) => {
+			    if (err) {
+				alert(err);
+			    } else {
+				// success!
+				Session.set('editContact', "");
+				location.reload();				
+			    }
+			});	    
+	},
+	
 	'click .saveButton-edit' : function(event) {
 	    var contactBeingEdited = Session.get('editContact');
 	    
@@ -576,7 +603,7 @@ if(Meteor.isClient) {
 	    var contacts = Contacts.findOne("Contacts")["contacts"];
 	    for (id in contacts) {
 		var key = "";
-		(contacts[id]["name"]["first"] != "")? key += first_name + " " : key = key;
+		(contacts[id]["name"]["first"] != "")? key += contacts[id]["name"]["first"] + " " : key = key;
 		(contacts[id]["name"]["middle"] != "")? key += contacts[id]["name"]["middle"] + " " : key = key;
 		(contacts[id]["name"]["last"] != "")? key += contacts[id]["name"]["last"] : key = key;	    
 		
@@ -616,7 +643,8 @@ if(Meteor.isClient) {
 				alert(err);
 			    } else {
 				// success!
-				location.reload();
+				Session.set('editContact', "");
+				location.reload();				
 			    }
 			});	    
 	}
