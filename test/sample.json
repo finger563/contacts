@@ -1,0 +1,115 @@
+{
+    "_id": "Contacts",
+    "contacts": [
+	{
+	    "name": {
+		"first": "John",
+		"middle": "",
+		"last": "Doe",
+		"nickname": ""
+	    },
+	    "birthday": "November 23, 1995",
+	    "email": {
+		"personal": "john.doe@gmail.com"
+	    },
+	    "phone": {
+		"mobile": "+1-615-666-6666"
+	    },
+	    "address": {
+		"home": {
+		    "apartment": "Metro Manor Apartments",
+		    "street": "500 5th Ave, N",
+		    "city": "Nashville",
+		    "state": "Tennessee",
+		    "zip": "37219",
+		    "country": "USA"
+		}
+	    }
+	},
+	{
+	    "name": {
+		"first": "Alexander",
+		"middle": "",
+		"last": "Smith",
+		"nickname": ""
+	    },
+	    "birthday": "April 7, 1990",
+	    "email": {
+		"personal": "alexander.smith@gmail.com",
+		"work": "alexander.smith@company.com"
+	    },
+	    "phone": {
+		"mobile": "+1-615-444-4444"
+	    },
+	    "address": {
+		"home": {
+		    "apartment": "Capital Towers",
+		    "street": "510 Gay Street",
+		    "city": "Nashville",
+		    "state": "Tennessee",
+		    "zip": "37219",
+		    "country": "USA"
+		},
+		"work": {
+		    "company": "Vanderbilt University",
+		    "street": "2201 West End Ave",
+		    "city": "Nashville",
+		    "state": "Tennessee",
+		    "zip": "37235",
+		    "country": "USA"
+		}
+	    }
+	},
+	{
+	    "name": {
+		"first": "Martin",
+		"middle": "",
+		"last": "King",
+		"nickname": ""
+	    },
+	    "birthday": "February 1, 1982",
+	    "email": {
+		"personal": "martin.king@gmail.com",
+		"work": "martin.king@company.com"
+	    },
+	    "phone": {
+		"mobile": "+1-609-333-3456"
+	    },
+	    "address": {
+		"work": {
+		    "company": "Siemens Corporation",
+		    "street": "755 College Road E",
+		    "city": "Princeton",
+		    "state": "New Jersey",
+		    "zip": "08540",
+		    "country": "USA"
+		}
+	    }
+	},
+	{
+	    "name": {
+		"first": "John",
+		"middle": "",
+		"last": "Oliver",
+		"nickname": "Olly"
+	    },
+	    "birthday": "September 13, 1976",
+	    "email": {
+		"personal": "john.oliver@gmail.com"
+	    },
+	    "phone": {
+		"mobile": "+1-914-555-5555"
+	    },
+	    "address": {
+		"work": {
+		    "company": "Last Week Tonight with John Oliver",
+		    "street": "524 West 57th Street",
+		    "city": "New York",
+		    "state": "New York",
+		    "zip": "10019",
+		    "country": "USA"
+		}
+	    }
+	}	    
+    ]
+}

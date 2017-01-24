@@ -1,5 +1,20 @@
-Contacts Management App using MeteorJS
-======================================
+Contacts Management App using Meteor
+====================================
+
+Getting Started:
+---------------
+
+* Install Meteor from [Here](https://www.meteor.com/): 
+
+```bash
+$ git clone https://github.com/pranav-srinivas-kumar/contacts
+& cd contacts/
+$ meteor npm install --save babel-runtime
+$ meteor
+```
+
+* Upload test/sample.json using the Import Contacts button in Navigation Bar for testing
+* Enjoy!
 
 Contact Cards Interface:
 ------------------------
