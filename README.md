@@ -4,7 +4,7 @@ Contacts Management App using Meteor
 Getting Started:
 ---------------
 
-* Install Meteor from [Here](https://www.meteor.com/): 
+* Install Meteor from [Here](https://www.meteor.com/)
 
 ```bash
 $ git clone https://github.com/pranav-srinivas-kumar/contacts
