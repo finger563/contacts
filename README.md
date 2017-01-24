@@ -1,4 +1,5 @@
-Contacts Management &amp; Visualization Application using MeteorJS
+Contacts Management App using MeteorJS
+======================================
 
 Contact Cards Interface:
 ------------------------
