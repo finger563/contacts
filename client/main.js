@@ -1,7 +1,7 @@
 /**
  * Author: Pranav Srinivas Kumar
  * Date  : 2017.01.24
- * File  : main.js
+ * File  : client/main.js
  *
  * This is the client-side main entry point
  */
