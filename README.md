@@ -13,8 +13,7 @@ $ meteor npm install --save babel-runtime
 $ meteor
 ```
 
-* Upload test/sample.json using the Import Contacts button in Navigation Bar for testing
-* Enjoy!
+* For testing, upload test/sample.json using the Import Contacts button in Navigation Bar
 
 Contact Cards Interface:
 ------------------------
