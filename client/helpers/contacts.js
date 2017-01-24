@@ -382,13 +382,7 @@ if(Meteor.isClient) {
     });
 
     Template.contacts.events({
-	'click .cancelButton' : function(event) {
-	    document.getElementsByClassName('newContactForm')[0].reset();
-	    $('#newContactFormRow').hide();	    
-	},
-
-	'click .editContactTrigger' : function(event) {
-	    console.log(event.target.id);
+	'focus .contactName' : function(event) {	    
 	    Session.set("editContact", event.target.id);
 	},
 
@@ -536,7 +530,97 @@ if(Meteor.isClient) {
 
 	    document.getElementsByClassName('newContactForm')[0].reset();
 	    $('#newContactFormRow').hide();
+	},
+
+	'click .cancelButton' : function(event) {
+	    document.getElementsByClassName('newContactForm')[0].reset();
+	    $('#newContactFormRow').hide();	    
+	},
+	
+	'click .cancelButton-edit' : function(event) {
+	    $('.button-collapse').sideNav('hide');
+	},
+
+	'click .saveButton-edit' : function(event) {
+	    var contactBeingEdited = Session.get('editContact');
+	    
+	    var first_name = $('#first_name_edit')[0].value;
+	    var middle_name = $('#middle_name_edit')[0].value;
+	    var last_name = $('#last_name_edit')[0].value;
+	    var nickname = $('#nickname_edit')[0].value;
+	    
+	    var birthday = $('#birthday_edit')[0].value;
+
+	    var mobile_phone = $('#mobile_phone_edit')[0].value;
+	    var home_phone = $('#home_phone_edit')[0].value;
+	    var work_phone = $('#work_phone_edit')[0].value;
+
+	    var personal_email = $('#personal_email_edit')[0].value;
+	    var secondary_email = $('#secondary_email_edit')[0].value;
+	    var work_email = $('#work_email_edit')[0].value;
+
+	    var home_apartment = $('#home_apartment_edit')[0].value;
+	    var home_street = $('#home_street_edit')[0].value;
+	    var home_city = $('#home_city_edit')[0].value;
+	    var home_state = $('#home_state_edit')[0].value;
+	    var home_zip = $('#home_zip_edit')[0].value;
+	    var home_country = $('#home_country_edit')[0].value;
+
+	    var work_company = $('#work_company_edit')[0].value;
+	    var work_street = $('#work_street_edit')[0].value;
+	    var work_city = $('#work_city_edit')[0].value;
+	    var work_state = $('#work_state_edit')[0].value;
+	    var work_zip = $('#work_zip_edit')[0].value;
+	    var work_country = $('#work_country_edit')[0].value;
+
+	    var contacts = Contacts.findOne("Contacts")["contacts"];
+	    for (id in contacts) {
+		var key = "";
+		(contacts[id]["name"]["first"] != "")? key += first_name + " " : key = key;
+		(contacts[id]["name"]["middle"] != "")? key += contacts[id]["name"]["middle"] + " " : key = key;
+		(contacts[id]["name"]["last"] != "")? key += contacts[id]["name"]["last"] : key = key;	    
+		
+		if (key == contactBeingEdited) {
+		    // Edit Contact File Here
+		    contacts[id]["name"]["first"] = first_name;
+		    contacts[id]["name"]["middle"] = middle_name;
+		    contacts[id]["name"]["last"] = last_name;
+		    contacts[id]["name"]["nickname"] = nickname;
+		    contacts[id]["birthday"] = birthday;
+		    contacts[id]["phone"]["mobile"] = mobile_phone;
+		    contacts[id]["phone"]["home"] = home_phone;
+		    contacts[id]["phone"]["work"] = work_phone;
+		    contacts[id]["email"]["personal"] = personal_email;
+		    contacts[id]["email"]["secondary"] = secondary_email;
+		    contacts[id]["email"]["work"] = work_email;
+		    contacts[id]["address"]["home"]["apartment"] = home_apartment;
+		    contacts[id]["address"]["home"]["street"] = home_street;
+		    contacts[id]["address"]["home"]["city"] = home_city;
+		    contacts[id]["address"]["home"]["state"] = home_state;
+		    contacts[id]["address"]["home"]["zip"] = home_zip;
+		    contacts[id]["address"]["home"]["country"] = home_country;
+		    
+		    contacts[id]["address"]["work"]["company"] = work_company;
+		    contacts[id]["address"]["work"]["street"] = work_street;
+		    contacts[id]["address"]["work"]["city"] = work_city;
+		    contacts[id]["address"]["work"]["state"] = work_state;
+		    contacts[id]["address"]["work"]["zip"] = work_zip;
+		    contacts[id]["address"]["work"]["country"] = work_country;
+		    break;
+		}
+	    }
+	    Meteor.call('SERVER.saveContacts',
+			contacts,
+			(err, res) => {
+			    if (err) {
+				alert(err);
+			    } else {
+				// success!
+				location.reload();
+			    }
+			});	    
 	}
+	
     });
 
 }

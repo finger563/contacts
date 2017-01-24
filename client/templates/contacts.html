@@ -36,11 +36,302 @@
     div {
     font-size: 12px;
     }
+    label.editContact {
+    font-size: 10px;
+    top : 35px;
+    padding:0px;
+    margin:0px;
+    border:0px;
+    display:inline;
+    }
+    input {
+    font-size: 12px;
+    }
   </style>
+
+  <ul id="slide-out" class="side-nav">
+    <li>
+      <div class="row">
+        <div class="col s12">
+
+	  {{#each getEditContact}}
+          <div class="card white">
+            <div class="card-content black-text">
+              <span class="card-title">Edit Contact</span>
+
+	      <div class="row">
+		<div class="col s12">
+
+		  <div class="card white">
+		    <div class="card-content black-text">
+		      <span class="card-title">General</span>
+		      
+		      <div class="input-field">
+			<i class="tiny material-icons prefix">account_circle</i>
+			<input id="first_name_edit" type="text" class="validate"
+			       value={{this.name.first}}>
+			<label
+			  class="editContact"
+			  for="first_name">First Name</label>
+		      </div>
+		      <div class="input-field">
+			<i class="tiny material-icons prefix">account_circle</i>
+			<input id="middle_name_edit"
+			       type="text" class="validate"
+			       value={{this.name.middle}}>
+			<label
+			  class="editContact"
+			  for="middle_name">Middle Name</label>
+		      </div>
+		      <div class="input-field">
+			<i class="tiny material-icons prefix">account_circle</i>
+			<input id="last_name_edit"
+			       type="text" class="validate"
+			       value={{this.name.last}}>
+			<label
+			  class="editContact"		    
+			  for="last_name">Last Name</label>
+		      </div>
+		      <div class="input-field">
+			<i class="tiny material-icons prefix">account_circle</i>
+			<input id="nickname_edit" type="text" class="validate"
+			       value={{this.name.nickname}}>
+			<label
+			  class="editContact"		    
+			  for="nickname">Nickname</label>
+		      </div>		
+		      <div class="input-field">
+			<i class="material-icons prefix">today</i>
+			<input id="birthday_edit" type="text"
+			       value={{this.birthday}}>
+			<label
+			  class="editContact"		    
+			  for="birthday">Birthday</label>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<!-- Start of Phone Numbers, Email Addresses Row -->
+		<div class="col s12">
+
+		  <div class="card white">
+		    <div class="card-content black-text">
+		      <span class="card-title">Phone Numbers</span>
+		      <div class="input-field">
+			<i class="material-icons prefix">speaker_phone</i>
+			<input id="mobile_phone_edit"
+			       type="text" class="validate"
+			       value={{this.phone.mobile}}>
+			<label class="editContact"
+			       for="mobile_phone">Mobile Phone</label>
+		      </div>
+		      <div class="input-field">
+			<i class="material-icons prefix">phone</i>
+			<input id="home_phone_edit"
+			       type="text" class="validate"
+			       value={{this.phone.home}}>
+			<label class="editContact"
+			       for="home_phone">Home Phone</label>
+		      </div>
+		      <div class="input-field">
+			<i class="material-icons prefix">contact_phone</i>
+			<input id="work_phone_edit"
+			       type="text" class="validate"
+			       value={{this.phone.work}}>       
+			<label class="editContact"
+			       for="work_phone">Work Phone</label>
+		      </div>
+		    </div>
+		  </div>
+		  
+		</div>
+		<!-- Start of Email -->
+		<div class="col s12">
+
+		  <div class="card white">
+		    <div class="card-content black-text">
+		      <span class="card-title">Email</span>	      
+		      
+		      <div class="input-field">
+			<i class="material-icons prefix">email</i>
+			<input id="personal_email_edit"
+			       type="email" class="validate"
+			       value={{this.email.personal}}>
+			<label class="editContact"
+			       for="personal_email">Personal Email</label>
+		      </div>
+		      <div class="input-field">
+			<i class="material-icons prefix">email</i>
+			<input id="secondary_email_edit" type="email"
+			       class="validate"
+			       value={{this.email.secondary}}>
+			<label class="editContact"
+			       for="secondary_email">Secondary Email</label>
+		      </div>		    
+		      <div class="input-field">
+			<i class="material-icons prefix">business</i>
+			<input id="work_email_edit"
+			       type="email" class="validate"
+			       value={{this.email.work}}>
+			<label class="editContact"
+			       for="work_email">Work Email</label>
+		      </div>
+
+		    </div>
+		  </div>
+		</div>
+		<!-- Start of Home, Work Address -->
+		<div class="col s12">
+
+		  <div class="card white">
+		    <div class="card-content black-text">
+		      <span class="card-title">Home Address</span>
+		      
+		      <div class="input-field">
+			<i class="material-icons prefix">home</i>
+			<input id="home_apartment_edit"
+			       type="text" class="validate"
+			       value={{this.address.home.apartment}}>
+			<label class="editContact"
+			       for="home_apartment">Apartment</label>
+		      </div>
+
+		      <div class="input-field">
+			<i class="material-icons prefix">directions</i>
+			<input id="home_street_edit"
+			       type="text" class="validate"
+			       value={{this.address.home.street}}>
+			<label class="editContact"
+			       for="home_street">Street</label>
+		      </div>
+		      <div class="row">
+			<div class="input-field col s6">
+			  <i class="material-icons prefix">location_city</i>
+			  <input id="home_city_edit"
+				 type="text" class="validate"
+				 value={{this.address.home.city}}>
+			  <label class="editContact"
+				 for="home_city">City</label>
+			</div>
+			<div class="input-field col s6">
+			  <i class="material-icons prefix">map</i>
+			  <input id="home_state_edit"
+				 type="text" class="validate"
+				 value={{this.address.home.state}}>
+			  <label class="editContact"
+				 for="home_state">State</label>
+			</div>
+		      </div>
+		      <div class="row">
+			<div class="input-field col s6">
+			  <i class="material-icons prefix">my_location</i>
+			  <input id="home_zip_edit"
+				 type="text" class="validate"
+				 value={{this.address.home.zip}}>
+			  <label class="editContact"
+				 for="home_zip">Zip</label>
+			</div>		      
+			<div class="input-field col s6">
+			  <i class="material-icons prefix">public</i>
+			  <input id="home_country_edit"
+				 type="text" class="validate"
+				 value={{this.address.home.country}}>
+			  <label class="editContact"
+				 for="home_country">Country</label>
+			</div>		      
+		      </div>
+		      
+		    </div>
+		  </div>
+		  
+		</div>
+		<div class="col s12">
+		  <div class="card white">
+		    <div class="card-content black-text">		  
+		      <span class="card-title">Work Address</span>
+		      <div class="input-field">
+			<i class="material-icons prefix">business</i>
+			<input id="work_company_edit"
+			       type="text" class="validate"
+			       value={{this.address.work.company}}>
+			<label class="editContact"
+			       for="work_company">Company</label>
+		      </div>		  
+		      <div class="input-field">
+			<i class="material-icons prefix">directions</i>
+			<input id="work_street_edit"
+			       type="text" class="validate"
+			       value={{this.address.work.street}}>
+			<label class="editContact"
+			       for="work_street">Street</label>
+		      </div>
+		      <div class="row">
+			<div class="input-field col s6">
+			  <i class="material-icons prefix">location_city</i>
+			  <input id="work_city_edit"
+				 type="text" class="validate"
+				 value={{this.address.work.city}}>
+			  <label class="editContact"
+				 for="work_city">City</label>
+			</div>
+			<div class="input-field col s6">
+			  <i class="material-icons prefix">map</i>
+			  <input id="work_state_edit"
+				 type="text" class="validate"
+				 value={{this.address.work.state}}>
+			  <label class="editContact"
+				 for="work_state">State</label>
+			</div>
+		      </div>
+		      <div class="row">
+			<div class="input-field col s6">
+			  <i class="material-icons prefix">my_location</i>
+			  <input id="work_zip_edit"
+				 type="text" class="validate"
+				 value={{this.address.work.zip}}>
+			  <label class="editContact"
+				 for="work_zip">Zip</label>
+			</div>		      
+			<div class="input-field col s6">
+			  <i class="material-icons prefix">public</i>
+			  <input id="work_country_edit"
+				 type="text" class="validate"
+				 value={{this.address.work.country}}>
+			  <label class="editContact"
+				 for="work_country">Country</label>
+			</div>		      
+		      </div>		      
+		    </div>
+		  </div>		  		  
+		</div> <!-- End of Home, Work Address -->
+
+		<div class="row">
+		  <div class="col s6">
+		    <a class="red waves-effect waves-light 
+			      btn saveButton-edit">Save</a>
+		  </div>
+		  <div class="col s6">		  
+		    <a class="red waves-effect waves-light 
+			      btn cancelButton-edit">Cancel</a>
+		  </div>
+		</div>		
+	      </div>	      
+	      
+	    </div>
+	  </div>
+	  {{/each}}
+	  
+	</div>
+      </div>      
+
+    </li>
+  </ul>  
+  
   <div class="container">
 
     <!-- Start of New Contact Form Row -->
-    <div class="row" id="newContactFormRow" style="display:none;">
+    <div class="row" id="newContactFormRow"
+	 style="display:none;">
       <div class="col s12">
 
 	<!-- Start of New Contact Form -->
@@ -242,152 +533,157 @@
 	<div class="card white">
           <div class="card-content black-text">
 	    <span class="card-title">
+	      <a href="#" data-activates="slide-out"
+		 class="button-collapse 
+			show-on-large
+			contactName"
+		 id="{{getContactDisplayName
+		     this.name.first 
+		     this.name.middle
+		     this.name.last}}">
 	      {{getContactDisplayName this.name.first
 	      this.name.middle this.name.last}}
+	      </a>
 	    </span>
-	    <p>	      
-	      <div class="row">
+	    <div class="row">
 
-		<h6>General</h6>
-		
-		{{#if hasBirthday this.name.first
-		this.name.middle this.name.last }}		
-		<div class="col s4 m4 l3">
-		  <b>Birthday</b>
-		</div>
-		<div class="col s8 m8 l9">
-		  <div contenteditable>{{this.birthday}}</div>
-		</div>		
-		{{/if}}
-		<hr>
-		
-		{{#if hasPhone this.name.first
-		this.name.middle this.name.last }}
-		<h6>Phone</h6>
-		
-		{{#if hasMobilePhone this.name.first
-		this.name.middle this.name.last }}		
-		<div class="col s4 m4 l3">
-		  <b>Mobile</b>
-		</div>
-		<div class="col s8 m8 l9">
-		  {{this.phone.mobile}}
-		</div>
-		{{/if}}
-
-		{{#if hasHomePhone this.name.first
-		this.name.middle this.name.last }}		
-		<div class="col s4 m4 l3">
-		  <b>Home</b>
-		</div>
-		<div class="col s8 m8 l9">
-		  {{this.phone.home}}
-		</div>
-		{{/if}}		
-
-		{{#if hasWorkPhone this.name.first
-		this.name.middle this.name.last }}		
-		<div class="col s4 m4 l3">
-		  <b>Work</b>
-		</div>
-		<div class="col s8 m8 l9">
-		  {{this.phone.work}}
-		</div>
-		{{/if}}		
-		<hr>
-		{{/if}}
-
-		{{#if hasEmail this.name.first
-		this.name.middle this.name.last}}
-		<h6>E-mail</h6>
-		{{#if hasPersonalEmail this.name.first
-		this.name.middle this.name.last }}
-		<div class="col s4 m4 l3">
-		  <b>Personal</b>
-		</div>
-		<div class="col s8 m8 l9">
-		  <a href="mailto:{{this.email.personal}}"
-		     target="_top" style="color: black;"
-		     title="{{this.email.personal}}">		  
-		    {{getEmailDomain this.email.personal}}
-		  </a>
-		</div>		
-		{{/if}}
-
-		{{#if hasSecondaryEmail this.name.first
-		this.name.middle this.name.last }}		
-		<div class="col s4 m4 l3">
-		  <b>Secondary</b>
-		</div>
-		<div class="col s8 m8 l9">
-		  <a href="mailto:{{this.email.secondary}}"
-		     target="_top" style="color: black;"
-		     title="{{this.email.secondary}}">		  
-		    {{getEmailDomain this.email.secondary}}
-		  </a>
-		</div>
-		{{/if}}
-
-		{{#if hasWorkEmail this.name.first
-		this.name.middle this.name.last }}		
-		<div class="col s4 m4 l3">
-		  <b>Work</b>
-		</div>
-		<div class="col s8 m8 l9">
-		  <a href="mailto:{{this.email.work}}"
-		     target="_top" style="color: black;"
-		     title="{{this.email.work}}">
-		    {{getEmailDomain this.email.work}}
-		  </a>
-		</div>
-		{{/if}}				
-		<hr>		
-		{{/if}}
-
-		{{#if hasAddress this.name.first
-		this.name.middle this.name.last}}
-		<h6>Address</h6>
-		{{#if hasHomeAddress this.name.first
-		this.name.middle this.name.last }}
-		<div class="col s4 m4 l3">
-		  <b>Home</b>
-		</div>
-		<div class="col s8 m8 l9">
-		  <a href="https://maps.google.com/?q={{this.address.home.street}}, {{this.address.home.city}}, {{this.address.home.state}}, {{this.address.home.country}}"
-		     target="_blank" style="color:black;">
-		    {{this.address.home.apartment}},<br>
-		    {{this.address.home.street}},<br>
-		    {{this.address.home.city}},&nbsp;{{this.address.home.state}}
-		    ,<br>{{this.address.home.zip}},&nbsp;
-		    {{this.address.home.country}}
-		  </a>
-		</div>		
-		{{/if}}			
-
-		{{#if hasWorkAddress this.name.first
-		this.name.middle this.name.last }}		
-		<div class="col s4 m4 l3">
-		  <b>Work</b>
-		</div>
-		<div class="col s8 m8 l9">		  
-		  <a href="https://maps.google.com/?q={{this.address.work.street}}, {{this.address.work.city}}, {{this.address.work.state}}, {{this.address.work.country}}"
-		     target="_blank" style="color:black;">
-		    {{this.address.work.company}},<br>
-		    {{this.address.work.street}},<br>
-		    {{this.address.work.city}},&nbsp;{{this.address.work.state}}
-		    ,<br>{{this.address.work.zip}},&nbsp;
-		    {{this.address.work.country}}
-		  </a>		  
-		</div>
-		{{/if}}		
-		<hr>
-		{{/if}}
-
-		
-	      </div>
+	      <h6>General</h6>
 	      
-	    </p>
-          </div>
+	      {{#if hasBirthday this.name.first
+	      this.name.middle this.name.last }}		
+	      <div class="col s4 m4 l3">
+		<b>Birthday</b>
+	      </div>
+	      <div class="col s8 m8 l9">
+		<div contenteditable>{{this.birthday}}</div>
+	      </div>		
+	      {{/if}}
+	      <hr>
+	      
+	      {{#if hasPhone this.name.first
+	      this.name.middle this.name.last }}
+	      <h6>Phone</h6>
+	      
+	      {{#if hasMobilePhone this.name.first
+	      this.name.middle this.name.last }}		
+	      <div class="col s4 m4 l3">
+		<b>Mobile</b>
+	      </div>
+	      <div class="col s8 m8 l9">
+		{{this.phone.mobile}}
+	      </div>
+	      {{/if}}
+
+	      {{#if hasHomePhone this.name.first
+	      this.name.middle this.name.last }}		
+	      <div class="col s4 m4 l3">
+		<b>Home</b>
+	      </div>
+	      <div class="col s8 m8 l9">
+		{{this.phone.home}}
+	      </div>
+	      {{/if}}		
+
+	      {{#if hasWorkPhone this.name.first
+	      this.name.middle this.name.last }}		
+	      <div class="col s4 m4 l3">
+		<b>Work</b>
+	      </div>
+	      <div class="col s8 m8 l9">
+		{{this.phone.work}}
+	      </div>
+	      {{/if}}		
+	      <hr>
+	      {{/if}}
+
+	      {{#if hasEmail this.name.first
+	      this.name.middle this.name.last}}
+	      <h6>E-mail</h6>
+	      {{#if hasPersonalEmail this.name.first
+	      this.name.middle this.name.last }}
+	      <div class="col s4 m4 l3">
+		<b>Personal</b>
+	      </div>
+	      <div class="col s8 m8 l9">
+		<a href="mailto:{{this.email.personal}}"
+		   target="_top" style="color: black;"
+		   title="{{this.email.personal}}">		  
+		  {{getEmailDomain this.email.personal}}
+		</a>
+	      </div>		
+	      {{/if}}
+
+	      {{#if hasSecondaryEmail this.name.first
+	      this.name.middle this.name.last }}		
+	      <div class="col s4 m4 l3">
+		<b>Secondary</b>
+	      </div>
+	      <div class="col s8 m8 l9">
+		<a href="mailto:{{this.email.secondary}}"
+		   target="_top" style="color: black;"
+		   title="{{this.email.secondary}}">		  
+		  {{getEmailDomain this.email.secondary}}
+		</a>
+	      </div>
+	      {{/if}}
+
+	      {{#if hasWorkEmail this.name.first
+	      this.name.middle this.name.last }}		
+	      <div class="col s4 m4 l3">
+		<b>Work</b>
+	      </div>
+	      <div class="col s8 m8 l9">
+		<a href="mailto:{{this.email.work}}"
+		   target="_top" style="color: black;"
+		   title="{{this.email.work}}">
+		  {{getEmailDomain this.email.work}}
+		</a>
+	      </div>
+	      {{/if}}				
+	      <hr>		
+	      {{/if}}
+
+	      {{#if hasAddress this.name.first
+	      this.name.middle this.name.last}}
+	      <h6>Address</h6>
+	      {{#if hasHomeAddress this.name.first
+	      this.name.middle this.name.last }}
+	      <div class="col s4 m4 l3">
+		<b>Home</b>
+	      </div>
+	      <div class="col s8 m8 l9">
+		<a href="https://maps.google.com/?q={{this.address.home.street}}, {{this.address.home.city}}, {{this.address.home.state}}, {{this.address.home.country}}"
+		   target="_blank" style="color:black;">
+		  {{this.address.home.apartment}},<br>
+		  {{this.address.home.street}},<br>
+		  {{this.address.home.city}},&nbsp;{{this.address.home.state}}
+		  ,<br>{{this.address.home.zip}},&nbsp;
+		  {{this.address.home.country}}
+		</a>
+	      </div>		
+	      {{/if}}			
+
+	      {{#if hasWorkAddress this.name.first
+	      this.name.middle this.name.last }}		
+	      <div class="col s4 m4 l3">
+		<b>Work</b>
+	      </div>
+	      <div class="col s8 m8 l9">		  
+		<a href="https://maps.google.com/?q={{this.address.work.street}}, {{this.address.work.city}}, {{this.address.work.state}}, {{this.address.work.country}}"
+		   target="_blank" style="color:black;">
+		  {{this.address.work.company}},<br>
+		  {{this.address.work.street}},<br>
+		  {{this.address.work.city}},&nbsp;{{this.address.work.state}}
+		  ,<br>{{this.address.work.zip}},&nbsp;
+		  {{this.address.work.country}}
+		</a>		  
+	      </div>
+	      {{/if}}		
+	      <hr>
+	      {{/if}}
+	      
+	    </div>
+	  </div>
 	</div>
 	{{/each}}
 	
@@ -397,7 +693,14 @@
   <script>
     $(document).ready(function(){
     $('.modal').modal();
+    $('.button-collapse').sideNav({
+    edge: 'right', // Choose the horizontal origin
+    menuWidth: 500,
+    closeOnClick: false,
+    draggable: true // Choose whether you can drag to open on touch screens
+    }
+    );
     });    
   </script>
- 
+  
 </template>
