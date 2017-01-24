@@ -57,7 +57,8 @@
 	  {{#each getEditContact}}
           <div class="card white">
             <div class="card-content black-text">
-              <span class="card-title">Edit Contact</span>
+              <span class="card-title">{{getContactDisplayName
+		this.name.first this.name.middle this.name.last}}</span>
 
 	      <div class="row">
 		<div class="col s12">
@@ -538,7 +539,7 @@
 		 id="{{getContactDisplayName
 		     this.name.first 
 		     this.name.middle
-		     this.name.last}}" style="color:black;">
+		     this.name.last}}" style="color:blue;">
 	      {{getContactDisplayName this.name.first
 	      this.name.middle this.name.last}}
 	      </a>
