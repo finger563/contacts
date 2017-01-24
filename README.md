@@ -8,7 +8,7 @@ Getting Started:
 
 ```bash
 $ git clone https://github.com/pranav-srinivas-kumar/contacts
-& cd contacts/
+$ cd contacts/
 $ meteor npm install --save babel-runtime
 $ meteor
 ```
