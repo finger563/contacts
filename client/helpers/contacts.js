@@ -1,11 +1,25 @@
+/**
+ * Author: Pranav Srinivas Kumar
+ * Date  : 2017.01.24
+ * File  : helpers/contacts.js
+ *
+ * This is the helper file for the contacts template
+ * This file contains template helper methods and event handlers
+ */
+
 if(Meteor.isClient) {
 
+    // Helper function to capitalize first letter of a string
+    // e.g., gmail => Gmail
     function capitalizeFirstLetter(string) {
 	return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
     // onCreated method for Contacts Template
+    // This method is called when the template is first created
     Template.contacts.onCreated(function() {
+
+	// Get a list of fullnames from the Contacts Collection
 	var contactObjectList = Contacts.findOne("Contacts")["contacts"];
 	var autoCompleteData = {};
 	for (id in contactObjectList) {
@@ -18,6 +32,8 @@ if(Meteor.isClient) {
 	    (last_name != "")? key += last_name : key = key;
 	    autoCompleteData[key] = null;	    
 	}
+	// Use the list of fullnames to configure the autocomplete list used
+	// by the searchbar in the navigation header
 	if ($('input.autocomplete') != undefined) {
 	    if (typeof $('input.autocomplete').autocomplete == "function") {
 		$('input.autocomplete').autocomplete({	
@@ -25,6 +41,8 @@ if(Meteor.isClient) {
 		});
 	    }
 	}
+
+	// Configure Google Fonts
 	WebFontConfig = {
 	    google: { families:
 		      [ 'Roboto Slab:700,400:latin',
@@ -33,6 +51,7 @@ if(Meteor.isClient) {
 			'Ubuntu'
 		      ] }
 	};
+	// Async load of Google Fonts for use in main.html
 	(function() {
 	    var wf = document.createElement('script');
 	    wf.src =
@@ -46,12 +65,16 @@ if(Meteor.isClient) {
 	Session.set("searchName", "");
     });
 
+    // Template onRendered Method to initialize template 
+    // This method is called each time the page is refreshed
     Template.contacts.rendered = function() {
 	Session.set("searchName", "");
     };
 
+    // Template helper methods
     Template.contacts.helpers({
 
+	// Use name.first, name.middle, and name.last to generate fullname string
 	getContactDisplayName(first_name, middle_name, last_name) {
 	    var key = "";
 	    (first_name != "")? key += first_name + " " : key = key;
@@ -60,10 +83,14 @@ if(Meteor.isClient) {
 	    return key;
 	},
 
+	// Get the domain of the email from the full address
 	getEmailDomain(emailAddress) {
 	    return capitalizeFirstLetter(emailAddress.split('@')[1].split('.')[0]);
 	},
 
+	// Get a list of contacts objects
+	// Return 1 value if this is in the context of a search
+	// Return all contacts otherwise
 	contactList() {
 	    if (Session.get("searchName") != "") {
 		var searchString = Session.get("searchName");
@@ -73,6 +100,7 @@ if(Meteor.isClient) {
 		return Contacts.findOne("Contacts")["contacts"];
 	},
 
+	// Returns a list of contact names (fullnames)
 	contactListNames() {
 	    var contactObjectList = Contacts.findOne("Contacts")["contacts"];
 	    var contactNameList = [];
@@ -88,7 +116,8 @@ if(Meteor.isClient) {
 	    }
 	    return contactNameList;
 	},
-
+	
+	// Return the contact record when provided with the contact fullname
 	findContact(contactName) {
 	    var contactObjectList = Contacts.findOne("Contacts")["contacts"];
 	    var findResult = [];
@@ -106,10 +135,13 @@ if(Meteor.isClient) {
 	    return findResult;
 	},
 
+	// Get the contact object for the contact currently being edited
 	getEditContact() {
 	    var contactName = Session.get("editContact");
 	    return Template.contacts.__helpers[" findContact"](contactName);
 	},
+
+	// Does the contact have any phone numbers to display?
 	hasPhone(first_name, middle_name, last_name) {	    
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
 		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
@@ -126,6 +158,7 @@ if(Meteor.isClient) {
 	    return false;
 	},
 
+	// Does the contact have any HOME phone numbers to display?
 	hasHomePhone(first_name, middle_name, last_name) {
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
 		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
@@ -142,6 +175,7 @@ if(Meteor.isClient) {
 	    return false;
 	},
 
+	// Does the contact have any MOBILE phone numbers to display?
 	hasMobilePhone(first_name, middle_name, last_name) {
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
 		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
@@ -158,6 +192,7 @@ if(Meteor.isClient) {
 	    return false;
 	},
 
+	// Does the contact have any WORK phone numbers to display?
 	hasWorkPhone(first_name, middle_name, last_name) {
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
 		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
@@ -174,6 +209,7 @@ if(Meteor.isClient) {
 	    return false;
 	},			
 
+	// Does the contact have any email to display?
 	hasEmail(first_name, middle_name, last_name) {
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
 		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
@@ -190,6 +226,7 @@ if(Meteor.isClient) {
 	    return false;
 	},    	
 
+	// Does the contact have any PERSONAL email to display?
 	hasPersonalEmail(first_name, middle_name, last_name) {
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
 		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
@@ -206,6 +243,7 @@ if(Meteor.isClient) {
 	    return false;
 	},
 
+	// Does the contact have any SECONDARY email to display?
 	hasSecondaryEmail(first_name, middle_name, last_name) {
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
 		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
@@ -222,6 +260,7 @@ if(Meteor.isClient) {
 	    return false;
 	},    	
 
+	// Does the contact have any WORK email to display?
 	hasWorkEmail(first_name, middle_name, last_name) {
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
 		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
@@ -238,6 +277,7 @@ if(Meteor.isClient) {
 	    return false;
 	},
 
+	// Does the contact have any birthday to display?
 	hasBirthday(first_name, middle_name, last_name) {
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
 		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
@@ -252,6 +292,7 @@ if(Meteor.isClient) {
 	    return false;
 	},        
 
+	// Does the contact have any address to display?
 	hasAddress(first_name, middle_name, last_name) {
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
 		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
@@ -266,6 +307,7 @@ if(Meteor.isClient) {
 	    return false;
 	},    
 
+	// Does the contact have any HOME address to display?
 	hasHomeAddress(first_name, middle_name, last_name) {
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
 		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
@@ -287,6 +329,7 @@ if(Meteor.isClient) {
 	    return false;
 	},
 
+	// Does the contact have any WORK address to display?
 	hasWorkAddress(first_name, middle_name, last_name) {
 	    for (id in Contacts.findOne("Contacts")["contacts"]) {
 		if((Contacts.findOne("Contacts")["contacts"][id]["name"]["first"] == first_name) &&
@@ -309,13 +352,18 @@ if(Meteor.isClient) {
 	}
     });
 
+    // Navigation Template Event Handlers
     Template.navigation.events({
+
+	// Handle typing and pressing ENTER on the autocomplete search bar
 	'keypress input.autocomplete': function (event) {	
 	    if (event.which === 13) {
 		event.preventDefault();		
 	    }
 	},
 
+	// Save searchName for searching after autocomplete is completed
+	// and an actual name appears on the searchbar
 	'change input.autocomplete' : function(event) {
 	    var contactNameList =
 		Template.contacts.__helpers[" contactListNames"]();
@@ -328,6 +376,8 @@ if(Meteor.isClient) {
 		}
 	    }
 	},
+
+	// Handle upload of contacts JSON
 	'change input.contactsUpload' : function(event) {
 	    var uploadedFile =
 		document.getElementsByClassName('contactsUpload')[0].files[0];
@@ -351,12 +401,18 @@ if(Meteor.isClient) {
 	    else 
 		alert("Failed to load file");
 	},
+
+	// Handle click of the newContacts "+" button in the navbar
 	'click .newContactButton' : function(event) {
-	    $('#newContactFormRow').show();
+	    $('#newContactFormRow').show();	    
 	},
+
+	// Handle click of the importContacts button in the navbar	
 	'click .contactsUploadButton' : function(event) {	    
 	    $('.contactsUpload')[0].click();
 	},
+
+	// Handle click of the exportContacts button in the navbar	
 	'click .exportContactsButton' : function(event) {
 	    var contacts = Contacts.findOne("Contacts")["contacts"];
 	    var dataString = "data:text/json;charset=utf-8,"
@@ -367,25 +423,18 @@ if(Meteor.isClient) {
 	    dlAnchorElem.setAttribute("href", dataString);
 	    dlAnchorElem.setAttribute("download", "contacts.json");
 	    dlAnchorElem.click();
-	},
-	'click .clearContactsButton' : function(event) {	    
-	    Meteor.call('SERVER.clearContacts',
-			(err, res) => {
-			    if (err) {
-				alert(err);
-			    } else {
-				// success
-				location.reload();
-			    }
-			});		    	    
-	}	
+	}
     });
 
+    // Contacts Template Event Handlers
     Template.contacts.events({
+
+	// Handle editContact Trigger
 	'focus .contactName' : function(event) {	    
 	    Session.set("editContact", event.target.id);
 	},
 
+	// Handle newContact save button
 	'click .saveButton' : function(event) {
 	    var first_name = $('#first_name')[0].value;
 	    var middle_name = $('#middle_name')[0].value;
@@ -532,15 +581,18 @@ if(Meteor.isClient) {
 	    $('#newContactFormRow').hide();
 	},
 
+	// Handle newContact cancel button
 	'click .cancelButton' : function(event) {
 	    document.getElementsByClassName('newContactForm')[0].reset();
 	    $('#newContactFormRow').hide();	    
 	},
-	
+
+	// Handle editContact cancel button
 	'click .cancelButton-edit' : function(event) {
 	    $('.button-collapse').sideNav('hide');
 	},
 
+	// Handle editContact delete button
 	'click .deleteButton-edit' : function(event) {
 	    var contactBeingDeleted = Session.get('editContact');
 	    var contacts = Contacts.findOne("Contacts")["contacts"];
@@ -567,7 +619,8 @@ if(Meteor.isClient) {
 			    }
 			});	    
 	},
-	
+
+	// Handle editContact save button
 	'click .saveButton-edit' : function(event) {
 	    var contactBeingEdited = Session.get('editContact');
 	    
